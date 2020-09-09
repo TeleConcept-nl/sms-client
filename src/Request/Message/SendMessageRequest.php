@@ -105,10 +105,10 @@ class SendMessageRequest extends Request implements SendMessageRequestInterface
             $errors['apiKey'] = 'was not set.';
         }
 
-        if (!is_int($headers['Outlet'])) {
-            $errors['outlet'] = 'was not set.';
-        } elseif ($headers['Outlet'] < 1) {
-            $errors['outlet'] = 'was set but was invalid.';
+        if (!is_int($headers['Organization'])) {
+            $errors['organization'] = 'was not set.';
+        } elseif ($headers['Organization'] < 1) {
+            $errors['organization'] = 'was set but was invalid.';
         }
 
         if ($options['originator'] === null) {

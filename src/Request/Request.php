@@ -22,7 +22,7 @@ abstract class Request extends Psr7Request implements RequestInterface
     protected $headers = [
         'Content-Type' => 'application/json',
         'Authorization' => null,
-        'Outlet' => null
+        'Organization' => null
     ];
 
     /**
@@ -37,13 +37,13 @@ abstract class Request extends Psr7Request implements RequestInterface
 
     /**
      * @param string $apiToken
-     * @param int $outletId
+     * @param int $organizationId
      * @return RequestInterface
      */
-    final public function setAuthorization(string $apiToken, int $outletId): RequestInterface
+    final public function setAuthorization(string $apiToken, int $organizationId): RequestInterface
     {
         $this->headers['Authorization'] = 'Bearer ' . $apiToken;
-        $this->headers['Outlet'] = $outletId;
+        $this->headers['Organization'] = $organizationId;
 
         return $this;
     }
