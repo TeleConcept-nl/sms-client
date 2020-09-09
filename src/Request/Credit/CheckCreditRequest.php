@@ -5,8 +5,8 @@ use GuzzleHttp\Psr7\Uri;
 use Teleconcept\Packages\Sms\Client\ClientInterface as SmsClient;
 use Teleconcept\Packages\Sms\Client\Exception\ValidationException;
 use Teleconcept\Packages\Sms\Client\Request\Request;
-use Teleconcept\Packages\Sms\Client\Response\Message\CheckCreditResponse;
-use Teleconcept\Packages\Sms\Client\Response\Message\CheckCreditResponseInterface;
+use Teleconcept\Packages\Sms\Client\Response\Credit\CheckCreditResponse;
+use Teleconcept\Packages\Sms\Client\Response\Credit\CheckCreditResponseInterface;
 use function is_int;
 use function is_string;
 
@@ -29,11 +29,11 @@ class CheckCreditRequest extends Request implements CheckCreditRequestInterface
     }
 
     /**
-     * @return CheckMessageResponseInterface
-     * @throws GuzzleException
+     * @return CheckCreditResponseInterface
      * @throws ValidationException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    final public function send(): CheckMessageResponseInterface
+    final public function send(): CheckCreditResponseInterface
     {
         $errors = $this->validate();
 
