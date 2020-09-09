@@ -107,7 +107,7 @@ class SendMessageRequest extends Request implements SendMessageRequestInterface
 
         if (!is_int($headers['Outlet'])) {
             $errors['outlet'] = 'was not set.';
-        } elseif ($headers['outlet-id'] < 1) {
+        } elseif ($headers['Outlet'] < 1) {
             $errors['outlet'] = 'was set but was invalid.';
         }
 
