@@ -7,6 +7,6 @@ use Teleconcept\Packages\Sms\Client\Request\RequestInterface;
  * Interface CheckRequestInterface
  * @package Teleconcept\Packages\Sms\Client\Request\Credit
  */
-interface CheckRequestInterface extends RequestInterface
+interface CheckCreditRequestInterface extends RequestInterface
 {
 }
