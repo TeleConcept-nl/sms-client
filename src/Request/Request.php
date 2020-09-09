@@ -55,7 +55,7 @@ abstract class Request extends Psr7Request implements RequestInterface
      */
     final public function setOption(string $option, $value): RequestInterface
     {
-        if (array_key_exists($option, $this->options) && $this->options[$option] !== $value) {
+        if (!array_key_exists($option, $this->options) || $this->options[$option] !== $value) {
             $this->options[$option] = $value;
         }
 
