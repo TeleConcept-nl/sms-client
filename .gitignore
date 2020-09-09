@@ -1,0 +1,5 @@
+.env.dev
+/vendor
+composer.lock
+.idea
+makefile
