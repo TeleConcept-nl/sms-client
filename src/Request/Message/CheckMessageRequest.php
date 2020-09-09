@@ -52,7 +52,7 @@ class CheckMessageRequest extends Request implements CheckMessageRequestInterfac
         }
 
         $body = stream_for(json_encode($this->options));
-        $uri = new Uri('/message/'. $this->options['reference']);
+        $uri = new Uri('/messages/'. $this->options['reference']);
         $request = $this
             ->withUri($uri)
             ->withBody($body);
