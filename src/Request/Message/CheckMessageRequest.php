@@ -2,6 +2,7 @@
 namespace Teleconcept\Packages\Sms\Client\Request\Message;
 
 use GuzzleHttp\Psr7\Uri;
+use Teleconcept\Packages\Sms\Client\ClientInterface as SmsClient;
 use Teleconcept\Packages\Sms\Client\Exception\ValidationException;
 use Teleconcept\Packages\Sms\Client\Request\Request;
 use Teleconcept\Packages\Sms\Client\Response\Message\CheckMessageResponse;
@@ -17,6 +18,18 @@ use function json_encode;
  */
 class CheckMessageRequest extends Request implements CheckMessageRequestInterface
 {
+    /**
+     * CreateRequest constructor.
+     * @param SmsClient $client
+     * @param array $options
+     */
+    public function __construct(SmsClient $client, array $options = [])
+    {
+        parent::__construct('GET', '/messages');
+        $this->client = $client;
+        $this->options = $options;
+    }
+
     /**
      * @inheritDoc
      */
