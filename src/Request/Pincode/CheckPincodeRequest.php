@@ -3,6 +3,7 @@ namespace Teleconcept\Packages\Sms\Client\Request\Pincode;
 
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Uri;
+use Teleconcept\Packages\Sms\Client\ClientInterface as SmsClient;
 use Teleconcept\Packages\Sms\Client\Exception\ValidationException;
 use Teleconcept\Packages\Sms\Client\Request\Request;
 use Teleconcept\Packages\Sms\Client\Response\Pincode\CheckPincodeResponse;
@@ -17,6 +18,18 @@ use function sprintf;
  */
 class CheckPincodeRequest extends Request implements CheckPincodeRequestInterface
 {
+    /**
+     * CreateRequest constructor.
+     * @param SmsClient $client
+     * @param array $options
+     */
+    public function __construct(SmsClient $client, array $options = [])
+    {
+        parent::__construct('GET', '/pincodes');
+        $this->client = $client;
+        $this->options = $options;
+    }
+
     /**
      * @param string $outletId
      * @param string $shortCode
