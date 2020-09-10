@@ -10,6 +10,7 @@ use Teleconcept\Packages\Sms\Client\Request\Message\SendMessageRequestInterface 
 use Teleconcept\Packages\Sms\Client\Request\Pincode\CheckPincodeRequestInterface;
 use Teleconcept\Packages\Sms\Client\Response\Error\BadRequestResponse;
 use Teleconcept\Packages\Sms\Client\Response\Error\NotFoundResponse;
+use Teleconcept\Packages\Sms\Client\Response\Error\PreconditionFailedResponse;
 use Teleconcept\Packages\Sms\Client\Response\Error\UnauthorizedResponse;
 use Teleconcept\Packages\Sms\Client\Response\Message\CheckMessageResponse;
 use Teleconcept\Packages\Sms\Client\Response\Message\SendMessageResponse;
@@ -107,11 +108,14 @@ class Client extends GuzzleClient implements ClientInterface
         if ($errorResponse && $errorResponse->getStatusCode() === 400) {
             return new BadRequestResponse($errorResponse);
         }
+        if ($errorResponse && $errorResponse->getStatusCode() === 401) {
+            return new UnauthorizedResponse($errorResponse);
+        }
         if ($errorResponse && $errorResponse->getStatusCode() === 404) {
             return new NotFoundResponse($errorResponse);
         }
-        if ($errorResponse && $errorResponse->getStatusCode() === 401) {
-            return new UnauthorizedResponse($errorResponse);
+        if ($errorResponse && $errorResponse->getStatusCode() === 412) {
+            return new PreconditionFailedResponse($errorResponse);
         }
 
         throw $exception;

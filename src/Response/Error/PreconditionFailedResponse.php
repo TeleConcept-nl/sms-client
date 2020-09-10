@@ -5,10 +5,10 @@ use Psr\Http\Message\ResponseInterface as Response;
 use function json_decode;
 
 /**
- * Class NotFoundResponse
+ * Class PreconditionFailedResponse
  * @package Teleconcept\Packages\Sms\Client\Response\Error
  */
-class BadRequestResponse implements BadRequestResponseInterface
+class PreconditionFailedResponse implements PreconditionFailedResponseInterface
 {
     /**
      * @var array

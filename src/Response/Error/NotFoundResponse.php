@@ -37,7 +37,6 @@ class NotFoundResponse implements NotFoundResponseInterface
     final public function detail(): string
     {
         return $this->detail;
-
     }
 
     /**
