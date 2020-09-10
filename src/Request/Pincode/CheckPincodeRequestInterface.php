@@ -11,7 +11,7 @@ use Teleconcept\Packages\Sms\Client\Response\Pincode\CheckPincodeResponseInterfa
 interface CheckPincodeRequestInterface extends RequestInterface
 {
     /**
-     * @param string $outletId
+     * @param int $outletId
      * @param string $shortCode
      * @param string $country
      * @param string $pincode
@@ -19,7 +19,7 @@ interface CheckPincodeRequestInterface extends RequestInterface
      * @return CheckPincodeRequestInterface
      */
     public function setRequiredParameters(
-        string $outletId,
+        int $outletId,
         string $shortCode,
         string $country,
         string $pincode,

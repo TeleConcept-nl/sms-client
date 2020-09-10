@@ -31,7 +31,7 @@ class CheckPincodeRequest extends Request implements CheckPincodeRequestInterfac
     }
 
     /**
-     * @param string $outletId
+     * @param int $outletId
      * @param string $shortCode
      * @param string $country
      * @param string $keyword
@@ -39,7 +39,7 @@ class CheckPincodeRequest extends Request implements CheckPincodeRequestInterfac
      * @return CheckPincodeRequestInterface
      */
     final public function setRequiredParameters(
-        string $outletId,
+        int $outletId,
         string $shortCode,
         string $country,
         string $pincode,
