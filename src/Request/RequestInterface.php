@@ -1,6 +1,7 @@
 <?php
 namespace Teleconcept\Packages\Sms\Client\Request;
 
+use Teleconcept\Packages\Sms\Client\Response\ResponseInterface as Response;
 
 /**
  * Interface RequestInterface

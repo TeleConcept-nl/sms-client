@@ -1,6 +1,7 @@
 <?php
 namespace Teleconcept\Packages\Sms\Client\Request\Message;
 
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Uri;
 use Teleconcept\Packages\Sms\Client\ClientInterface as SmsClient;
 use Teleconcept\Packages\Sms\Client\Exception\ValidationException;
@@ -11,7 +12,7 @@ use function GuzzleHttp\Psr7\stream_for;
 use function is_int;
 use function is_string;
 use function json_encode;
-
+use Teleconcept\Packages\Sms\Client\Response\ResponseInterface as Response;
 /**
  * Class CheckRequest
  * @package Teleconcept\Packages\Sms\Client\Request\Message
@@ -40,8 +41,8 @@ class CheckMessageRequest extends Request implements CheckMessageRequestInterfac
 
     /**
      * @return CheckMessageResponseInterface
-     * @throws GuzzleException
      * @throws ValidationException
+     * @throws GuzzleException
      */
     final public function send(): CheckMessageResponseInterface
     {

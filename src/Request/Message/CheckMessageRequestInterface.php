@@ -2,6 +2,7 @@
 namespace Teleconcept\Packages\Sms\Client\Request\Message;
 
 use Teleconcept\Packages\Sms\Client\Request\RequestInterface;
+use Teleconcept\Packages\Sms\Client\Response\Message\CheckMessageResponseInterface as CheckMessageResponse;
 
 /**
  * Interface CheckRequestInterface
@@ -14,4 +15,9 @@ interface CheckMessageRequestInterface extends RequestInterface
      * @return CheckMessageRequestInterface
      */
     public function setReference(string $reference): CheckMessageRequestInterface;
+
+    /**
+     * @return CheckMessageResponse
+     */
+    public function send(): CheckMessageResponse;
 }
