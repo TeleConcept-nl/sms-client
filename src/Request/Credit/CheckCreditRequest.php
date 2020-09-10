@@ -53,20 +53,7 @@ class CheckCreditRequest extends Request implements CheckCreditRequestInterface
             $request = $request->withAddedHeader($header, $value);
         }
 
-        try {
-            $response = $this->client->send($request);
-        } catch (ClientException $exception) {
-            $response = $exception->getResponse();
-            if ($response && $response->getStatusCode() === 404) {
-                return new NotFoundResponse($response);
-            }
-            if ($response && $response->getStatusCode() === 401) {
-                return new UnauthorizedResponse($response);
-            }
-            throw $exception;
-        }
-
-        return new CheckCreditResponse($response);
+        return $this->client->checkCredit($request);
     }
 
     /**

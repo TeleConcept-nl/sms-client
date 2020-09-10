@@ -7,7 +7,7 @@ use Teleconcept\Packages\Sms\Client\Response\ResponseInterface as Response;
  * Interface RequestInterface
  * @package Teleconcept\Packages\Sms\Client\Request
  */
-interface RequestInterface
+interface RequestInterface extends \Psr\Http\Message\RequestInterface
 {
     /**
      * @param string $apiToken

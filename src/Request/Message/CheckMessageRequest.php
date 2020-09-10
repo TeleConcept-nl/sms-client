@@ -65,20 +65,7 @@ class CheckMessageRequest extends Request implements CheckMessageRequestInterfac
             $request = $request->withAddedHeader($header, $value);
         }
 
-        try {
-            $response = $this->client->send($request);
-        } catch (ClientException $exception) {
-            $response = $exception->getResponse();
-            if ($response && $response->getStatusCode() === 404) {
-                return new NotFoundResponse($response);
-            }
-            if ($response && $response->getStatusCode() === 401) {
-                return new UnauthorizedResponse($response);
-            }
-            throw $exception;
-        }
-
-        return new CheckMessageResponse($response);
+        return $this->client->checkMessage($request);
     }
 
     /**

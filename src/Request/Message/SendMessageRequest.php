@@ -91,20 +91,7 @@ class SendMessageRequest extends Request implements SendMessageRequestInterface
             $request = $request->withAddedHeader($header, $value);
         }
 
-        try {
-            $response = $this->client->send($request);
-        } catch (ClientException $exception) {
-            $response = $exception->getResponse();
-            if ($response && $response->getStatusCode() === 404) {
-                return new NotFoundResponse($response);
-            }
-            if ($response && $response->getStatusCode() === 401) {
-                return new UnauthorizedResponse($response);
-            }
-            throw $exception;
-        }
-
-        return new SendMessageResponse($response);
+        return $this->client->sendMessage($request);
     }
 
     /**
