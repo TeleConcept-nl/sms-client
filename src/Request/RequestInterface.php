@@ -22,4 +22,9 @@ interface RequestInterface
      * @return RequestInterface
      */
     public function setOption(string $option, $value): RequestInterface;
+
+    /**
+     * @return Response
+     */
+    public function send(): Response;
 }

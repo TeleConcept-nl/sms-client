@@ -2,7 +2,6 @@
 namespace Teleconcept\Packages\Sms\Client\Request\Credit;
 
 use Teleconcept\Packages\Sms\Client\Request\RequestInterface;
-use Teleconcept\Packages\Sms\Client\Response\Credit\CheckCreditResponseInterface as CheckCreditResponse;
 
 /**
  * Interface CheckRequestInterface
@@ -10,8 +9,4 @@ use Teleconcept\Packages\Sms\Client\Response\Credit\CheckCreditResponseInterface
  */
 interface CheckCreditRequestInterface extends RequestInterface
 {
-    /**
-     * @return CheckCreditResponse
-     */
-    public function send(): CheckCreditResponse;
 }

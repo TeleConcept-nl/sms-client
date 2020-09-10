@@ -1,12 +1,17 @@
 <?php
 namespace Teleconcept\Packages\Sms\Client\Request\Credit;
 
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Uri;
 use Teleconcept\Packages\Sms\Client\ClientInterface as SmsClient;
 use Teleconcept\Packages\Sms\Client\Exception\ValidationException;
 use Teleconcept\Packages\Sms\Client\Request\Request;
 use Teleconcept\Packages\Sms\Client\Response\Credit\CheckCreditResponse;
 use Teleconcept\Packages\Sms\Client\Response\Credit\CheckCreditResponseInterface;
+use Teleconcept\Packages\Sms\Client\Response\Error\NotFoundResponse;
+use Teleconcept\Packages\Sms\Client\Response\Error\UnauthorizedResponse;
+use Teleconcept\Packages\Sms\Client\Response\ResponseInterface as Response;
 use function is_int;
 use function is_string;
 
@@ -29,11 +34,11 @@ class CheckCreditRequest extends Request implements CheckCreditRequestInterface
     }
 
     /**
-     * @return CheckCreditResponseInterface
+     * @return CheckCreditResponse|
      * @throws ValidationException
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
-    final public function send(): CheckCreditResponseInterface
+    final public function send(): Response
     {
         $errors = $this->validate();
 
@@ -48,7 +53,18 @@ class CheckCreditRequest extends Request implements CheckCreditRequestInterface
             $request = $request->withAddedHeader($header, $value);
         }
 
-        $response = $this->client->send($request);
+        try {
+            $response = $this->client->send($request);
+        } catch (ClientException $exception) {
+            $response = $exception->getResponse();
+            if ($response && $response->getStatusCode() === 404) {
+                return new NotFoundResponse($response);
+            }
+            if ($response && $response->getStatusCode() === 401) {
+                return new UnauthorizedResponse($response);
+            }
+            throw $exception;
+        }
 
         return new CheckCreditResponse($response);
     }

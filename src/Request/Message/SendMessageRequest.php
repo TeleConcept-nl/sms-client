@@ -2,12 +2,16 @@
 namespace Teleconcept\Packages\Sms\Client\Request\Message;
 
 use DateTimeImmutable;
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use Teleconcept\Packages\Sms\Client\ClientInterface as SmsClient;
 use Teleconcept\Packages\Sms\Client\Exception\ValidationException;
 use Teleconcept\Packages\Sms\Client\Request\Request;
+use Teleconcept\Packages\Sms\Client\Response\Error\NotFoundResponse;
+use Teleconcept\Packages\Sms\Client\Response\Error\UnauthorizedResponse;
 use Teleconcept\Packages\Sms\Client\Response\Message\SendMessageResponse;
 use Teleconcept\Packages\Sms\Client\Response\Message\SendMessageResponseInterface;
+use Teleconcept\Packages\Sms\Client\Response\ResponseInterface as Response;
 use function filter_var;
 use function GuzzleHttp\Psr7\stream_for;
 use function is_array;
@@ -68,11 +72,11 @@ class SendMessageRequest extends Request implements SendMessageRequestInterface
     }
 
     /**
-     * @return SendMessageResponseInterface
+     * @return Response
      * @throws GuzzleException
      * @throws ValidationException
      */
-    final public function send(): SendMessageResponseInterface
+    final public function send(): Response
     {
         $errors = $this->validate();
 
@@ -87,7 +91,18 @@ class SendMessageRequest extends Request implements SendMessageRequestInterface
             $request = $request->withAddedHeader($header, $value);
         }
 
-        $response = $this->client->send($request);
+        try {
+            $response = $this->client->send($request);
+        } catch (ClientException $exception) {
+            $response = $exception->getResponse();
+            if ($response && $response->getStatusCode() === 404) {
+                return new NotFoundResponse($response);
+            }
+            if ($response && $response->getStatusCode() === 401) {
+                return new UnauthorizedResponse($response);
+            }
+            throw $exception;
+        }
 
         return new SendMessageResponse($response);
     }

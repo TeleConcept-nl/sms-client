@@ -1,11 +1,14 @@
 <?php
 namespace Teleconcept\Packages\Sms\Client\Request\Message;
 
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Uri;
 use Teleconcept\Packages\Sms\Client\ClientInterface as SmsClient;
 use Teleconcept\Packages\Sms\Client\Exception\ValidationException;
 use Teleconcept\Packages\Sms\Client\Request\Request;
+use Teleconcept\Packages\Sms\Client\Response\Error\NotFoundResponse;
+use Teleconcept\Packages\Sms\Client\Response\Error\UnauthorizedResponse;
 use Teleconcept\Packages\Sms\Client\Response\Message\CheckMessageResponse;
 use Teleconcept\Packages\Sms\Client\Response\Message\CheckMessageResponseInterface;
 use function GuzzleHttp\Psr7\stream_for;
@@ -40,11 +43,11 @@ class CheckMessageRequest extends Request implements CheckMessageRequestInterfac
     }
 
     /**
-     * @return CheckMessageResponseInterface
+     * @return Response
      * @throws ValidationException
      * @throws GuzzleException
      */
-    final public function send(): CheckMessageResponseInterface
+    final public function send(): Response
     {
         $errors = $this->validate();
 
@@ -62,7 +65,18 @@ class CheckMessageRequest extends Request implements CheckMessageRequestInterfac
             $request = $request->withAddedHeader($header, $value);
         }
 
-        $response = $this->client->send($request);
+        try {
+            $response = $this->client->send($request);
+        } catch (ClientException $exception) {
+            $response = $exception->getResponse();
+            if ($response && $response->getStatusCode() === 404) {
+                return new NotFoundResponse($response);
+            }
+            if ($response && $response->getStatusCode() === 401) {
+                return new UnauthorizedResponse($response);
+            }
+            throw $exception;
+        }
 
         return new CheckMessageResponse($response);
     }

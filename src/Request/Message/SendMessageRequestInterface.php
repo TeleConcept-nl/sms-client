@@ -3,7 +3,6 @@ namespace Teleconcept\Packages\Sms\Client\Request\Message;
 
 use DateTimeImmutable;
 use Teleconcept\Packages\Sms\Client\Request\RequestInterface;
-use Teleconcept\Packages\Sms\Client\Response\Message\SendMessageResponseInterface as MessageCreateResponse;
 
 /**
  * Interface CreateRequestInterface
@@ -34,9 +33,4 @@ interface SendMessageRequestInterface extends RequestInterface
      * @return SendMessageRequestInterface
      */
     public function setWebHook(string $webhook): SendMessageRequestInterface;
-
-    /**
-     * @return MessageCreateResponse
-     */
-    public function send(): MessageCreateResponse;
 }

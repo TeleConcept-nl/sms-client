@@ -2,7 +2,6 @@
 namespace Teleconcept\Packages\Sms\Client\Request\Pincode;
 
 use Teleconcept\Packages\Sms\Client\Request\RequestInterface;
-use Teleconcept\Packages\Sms\Client\Response\Pincode\CheckPincodeResponseInterface;
 
 /**
  * Interface CheckRequestInterface
@@ -25,9 +24,4 @@ interface CheckPincodeRequestInterface extends RequestInterface
         string $pincode,
         string $keyword
     ): CheckPincodeRequestInterface;
-
-    /**
-     * @return CheckPincodeResponseInterface
-     */
-    public function send(): CheckPincodeResponseInterface;
 }
