@@ -8,6 +8,7 @@ use Teleconcept\Packages\Sms\Client\Request\Credit\CheckCreditRequestInterface a
 use Teleconcept\Packages\Sms\Client\Request\Message\CheckMessageRequestInterface as CheckMessageRequest;
 use Teleconcept\Packages\Sms\Client\Request\Message\SendMessageRequestInterface as SendMessageRequest;
 use Teleconcept\Packages\Sms\Client\Request\Pincode\CheckPincodeRequestInterface;
+use Teleconcept\Packages\Sms\Client\Response\Credit\CheckCreditResponse;
 use Teleconcept\Packages\Sms\Client\Response\Error\BadRequestResponse;
 use Teleconcept\Packages\Sms\Client\Response\Error\NotFoundResponse;
 use Teleconcept\Packages\Sms\Client\Response\Error\PreconditionFailedResponse;
@@ -45,7 +46,7 @@ class Client extends GuzzleClient implements ClientInterface
             return $this->processClientException($exception);
         }
 
-        return new CheckPincodeResponse($response);
+        return new CheckCreditResponse($response);
     }
 
     /**
