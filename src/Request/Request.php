@@ -19,21 +19,16 @@ abstract class Request extends Psr7Request implements RequestInterface
     /**
      * @var array
      */
-    protected $headers = [
-        'Content-Type' => 'application/json',
-        'Authorization' => null,
-        'Organization' => null
-    ];
-
-    /**
-     * @var array
-     */
     protected $options;
 
     /**
      * @var array
      */
-    protected $errors = [];
+    protected $headers = [
+        'Content-Type' => 'application/json',
+        'Authorization' => null,
+        'Organization' => null
+    ];
 
     /**
      * @param string $apiToken
