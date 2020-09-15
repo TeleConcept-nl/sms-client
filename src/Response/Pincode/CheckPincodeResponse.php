@@ -1,5 +1,5 @@
 <?php
-namespace Teleconcept\Packages\Sms\Client\Response\Pincode;
+namespace Teleconcept\Sms\Client\Response\Pincode;
 
 use DateTimeImmutable;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -9,7 +9,7 @@ use function json_decode;
 
 /**
  * Class CheckPincodeResponse
- * @package Teleconcept\Packages\Sms\Client\Response\Pincode
+ * @package Teleconcept\Sms\Client\Response\Pincode
  */
 class CheckPincodeResponse implements CheckPincodeResponseInterface
 {

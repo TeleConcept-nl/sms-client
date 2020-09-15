@@ -1,12 +1,12 @@
 <?php
-namespace Teleconcept\Packages\Sms\Client\Response\Error;
+namespace Teleconcept\Sms\Client\Response\Error;
 
 
-use Teleconcept\Packages\Sms\Client\Response\ResponseInterface as Response;
+use Teleconcept\Sms\Client\Response\ResponseInterface as Response;
 
 /**
  * Class PreconditionFailedResponse
- * @package Teleconcept\Packages\Sms\Client\Response\Error
+ * @package Teleconcept\Sms\Client\Response\Error
  */
 interface PreconditionFailedResponseInterface extends Response
 {

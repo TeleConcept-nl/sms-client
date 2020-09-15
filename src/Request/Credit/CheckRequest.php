@@ -1,25 +1,21 @@
 <?php
-namespace Teleconcept\Packages\Sms\Client\Request\Credit;
+namespace Teleconcept\Sms\Client\Request\Credit;
 
-use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Uri;
-use Teleconcept\Packages\Sms\Client\ClientInterface as SmsClient;
-use Teleconcept\Packages\Sms\Client\Exception\ValidationException;
-use Teleconcept\Packages\Sms\Client\Request\Request;
-use Teleconcept\Packages\Sms\Client\Response\Credit\CheckCreditResponse;
-use Teleconcept\Packages\Sms\Client\Response\Credit\CheckCreditResponseInterface;
-use Teleconcept\Packages\Sms\Client\Response\Error\NotFoundResponse;
-use Teleconcept\Packages\Sms\Client\Response\Error\UnauthorizedResponse;
-use Teleconcept\Packages\Sms\Client\Response\ResponseInterface as Response;
+use Teleconcept\Sms\Client\ClientInterface as SmsClient;
+use Teleconcept\Sms\Client\Exception\ValidationException;
+use Teleconcept\Sms\Client\Request\Request;
+use Teleconcept\Sms\Client\Response\Credit\CheckCreditResponse;
+use Teleconcept\Sms\Client\Response\ResponseInterface as Response;
 use function is_int;
 use function is_string;
 
 /**
  * Class CheckCreditRequest
- * @package Teleconcept\Packages\Sms\Client\Request\Credit
+ * @package Teleconcept\Sms\Client\Request\Credit
  */
-class CheckCreditRequest extends Request implements CheckCreditRequestInterface
+class CheckRequest extends Request implements CheckRequestInterface
 {
     /**
      * CreateRequest constructor.

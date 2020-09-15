@@ -1,9 +1,9 @@
 <?php
-namespace Teleconcept\Packages\Sms\Client\Response;
+namespace Teleconcept\Sms\Client\Response;
 
 /**
  * Interface ResponseInterface
- * @package Teleconcept\Packages\Sms\Client\Response
+ * @package Teleconcept\Sms\Client\Response
  */
 interface ResponseInterface
 {

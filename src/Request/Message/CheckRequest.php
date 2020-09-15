@@ -1,26 +1,22 @@
 <?php
-namespace Teleconcept\Packages\Sms\Client\Request\Message;
+namespace Teleconcept\Sms\Client\Request\Message;
 
-use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Uri;
-use Teleconcept\Packages\Sms\Client\ClientInterface as SmsClient;
-use Teleconcept\Packages\Sms\Client\Exception\ValidationException;
-use Teleconcept\Packages\Sms\Client\Request\Request;
-use Teleconcept\Packages\Sms\Client\Response\Error\NotFoundResponse;
-use Teleconcept\Packages\Sms\Client\Response\Error\UnauthorizedResponse;
-use Teleconcept\Packages\Sms\Client\Response\Message\CheckMessageResponse;
-use Teleconcept\Packages\Sms\Client\Response\Message\CheckMessageResponseInterface;
+use Teleconcept\Sms\Client\ClientInterface as SmsClient;
+use Teleconcept\Sms\Client\Exception\ValidationException;
+use Teleconcept\Sms\Client\Request\Request;
+use Teleconcept\Sms\Client\Response\ResponseInterface as Response;
 use function GuzzleHttp\Psr7\stream_for;
 use function is_int;
 use function is_string;
 use function json_encode;
-use Teleconcept\Packages\Sms\Client\Response\ResponseInterface as Response;
+
 /**
  * Class CheckRequest
- * @package Teleconcept\Packages\Sms\Client\Request\Message
+ * @package Teleconcept\Sms\Client\Request\Message
  */
-class CheckMessageRequest extends Request implements CheckMessageRequestInterface
+class CheckRequest extends Request implements CheckRequestInterface
 {
     /**
      * CreateRequest constructor.
@@ -37,7 +33,7 @@ class CheckMessageRequest extends Request implements CheckMessageRequestInterfac
     /**
      * @inheritDoc
      */
-    final public function setReference(string $reference): CheckMessageRequestInterface
+    final public function setReference(string $reference): CheckRequestInterface
     {
         return $this->setOption('reference', $reference);
     }

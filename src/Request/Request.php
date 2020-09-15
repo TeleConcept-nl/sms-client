@@ -1,13 +1,13 @@
 <?php
-namespace Teleconcept\Packages\Sms\Client\Request;
+namespace Teleconcept\Sms\Client\Request;
 
 use GuzzleHttp\Psr7\Request as Psr7Request;
-use Teleconcept\Packages\Sms\Client\ClientInterface as SmsClient;
+use Teleconcept\Sms\Client\ClientInterface as SmsClient;
 use function array_key_exists;
 
 /**
  * Class Request
- * @package Teleconcept\Packages\Sms\Client\Request
+ * @package Teleconcept\Sms\Client\Request
  */
 abstract class Request extends Psr7Request implements RequestInterface
 {

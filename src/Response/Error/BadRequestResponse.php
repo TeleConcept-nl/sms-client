@@ -1,12 +1,12 @@
 <?php
-namespace Teleconcept\Packages\Sms\Client\Response\Error;
+namespace Teleconcept\Sms\Client\Response\Error;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use function json_decode;
 
 /**
  * Class NotFoundResponse
- * @package Teleconcept\Packages\Sms\Client\Response\Error
+ * @package Teleconcept\Sms\Client\Response\Error
  */
 class BadRequestResponse implements BadRequestResponseInterface
 {

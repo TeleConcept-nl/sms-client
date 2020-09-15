@@ -1,11 +1,11 @@
 <?php
-namespace Teleconcept\Packages\Sms\Client\Request;
+namespace Teleconcept\Sms\Client\Request;
 
-use Teleconcept\Packages\Sms\Client\Response\ResponseInterface as Response;
+use Teleconcept\Sms\Client\Response\ResponseInterface as Response;
 
 /**
  * Interface RequestInterface
- * @package Teleconcept\Packages\Sms\Client\Request
+ * @package Teleconcept\Sms\Client\Request
  */
 interface RequestInterface extends \Psr\Http\Message\RequestInterface
 {

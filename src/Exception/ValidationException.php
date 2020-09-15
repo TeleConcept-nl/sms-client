@@ -1,12 +1,12 @@
 <?php
-namespace Teleconcept\Packages\Sms\Client\Exception;
+namespace Teleconcept\Sms\Client\Exception;
 
 use Exception;
 use function implode;
 
 /**
  * Class ValidationException
- * @package Teleconcept\Packages\Sms\Client\Exception
+ * @package Teleconcept\Sms\Client\Exception
  */
 class ValidationException extends Exception
 {

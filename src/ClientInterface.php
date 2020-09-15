@@ -1,16 +1,16 @@
 <?php
-namespace Teleconcept\Packages\Sms\Client;
+namespace Teleconcept\Sms\Client;
 
-use Teleconcept\Packages\Sms\Client\Request\Credit\CheckCreditRequestInterface as CheckCreditRequest;
-use Teleconcept\Packages\Sms\Client\Request\Message\CheckMessageRequestInterface as CheckMessageRequest;
-use Teleconcept\Packages\Sms\Client\Request\Message\SendMessageRequestInterface as SendMessageRequest;
-use Teleconcept\Packages\Sms\Client\Request\Pincode\CheckPincodeRequestInterface as CheckPincodeRequest;
-use Teleconcept\Packages\Sms\Client\Response\ResponseInterface as Response;
+use Teleconcept\Sms\Client\Request\Credit\CheckRequestInterface as CheckCreditRequest;
+use Teleconcept\Sms\Client\Request\Message\CheckRequestInterface as CheckMessageRequest;
+use Teleconcept\Sms\Client\Request\Message\CreateRequestInterface as SendMessageRequest;
+use Teleconcept\Sms\Client\Request\Pincode\CheckRequestInterface as CheckPincodeRequest;
+use Teleconcept\Sms\Client\Response\ResponseInterface as Response;
 use GuzzleHttp\Exception\GuzzleException;
 
 /**
  * Interface ClientInterface
- * @package Teleconcept\Packages\Transaction\Ivr\Client
+ * @package Teleconcept\Sms\Client
  */
 interface ClientInterface extends \GuzzleHttp\ClientInterface
 {

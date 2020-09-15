@@ -1,12 +1,12 @@
 <?php
-namespace Teleconcept\Packages\Sms\Client\Response\Message;
+namespace Teleconcept\Sms\Client\Response\Message;
 
 use Psr\Http\Message\ResponseInterface;
 use function json_decode;
 
 /**
  * Class CreateResponse
- * @package Teleconcept\Packages\Sms\Client\Response\Message
+ * @package Teleconcept\Sms\Client\Response\Message
  */
 class SendMessageResponse implements SendMessageResponseInterface
 {

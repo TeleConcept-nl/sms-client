@@ -1,11 +1,11 @@
 <?php
-namespace Teleconcept\Packages\Sms\Client\Response\Message;
+namespace Teleconcept\Sms\Client\Response\Message;
 
-use Teleconcept\Packages\Sms\Client\Response\ResponseInterface;
+use Teleconcept\Sms\Client\Response\ResponseInterface;
 
 /**
  * Interface CheckMessageResponseInterface
- * @package Teleconcept\Packages\Sms\Client\Response\Message
+ * @package Teleconcept\Sms\Client\Response\Message
  */
 interface CheckMessageResponseInterface extends ResponseInterface
 {

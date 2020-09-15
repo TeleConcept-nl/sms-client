@@ -1,11 +1,11 @@
 <?php
-namespace Teleconcept\Packages\Sms\Client\Response\Credit;
+namespace Teleconcept\Sms\Client\Response\Credit;
 
 use DateTimeImmutable;
 
 /**
  * Class Message
- * @package Teleconcept\Packages\Sms\Client\Response\Message
+ * @package Teleconcept\Sms\Client\Response\Message
  */
 interface PurchaseInterface
 {

@@ -15,12 +15,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Teleconcept\\Packages\\Sms\\Client\\": "src/"
+            "Teleconcept\\Sms\\Client\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Teleconcept\\Packages\\Sms\\Client\\Tests\\": "tests/"
+            "Teleconcept\\Sms\\Client\\Tests\\": "tests/"
         }
     }
 }

@@ -1,11 +1,11 @@
 <?php
-namespace Teleconcept\Packages\Sms\Client\Response\Message;
+namespace Teleconcept\Sms\Client\Response\Message;
 
 use DateTimeImmutable;
 
 /**
  * Class Message
- * @package Teleconcept\Packages\Sms\Client\Response\Message
+ * @package Teleconcept\Sms\Client\Response\Message
  */
 interface MessageInterface
 {

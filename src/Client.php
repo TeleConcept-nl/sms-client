@@ -1,26 +1,26 @@
 <?php
-namespace Teleconcept\Packages\Sms\Client;
+namespace Teleconcept\Sms\Client;
 
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
-use Teleconcept\Packages\Sms\Client\Request\Credit\CheckCreditRequestInterface as CheckCreditRequest;
-use Teleconcept\Packages\Sms\Client\Request\Message\CheckMessageRequestInterface as CheckMessageRequest;
-use Teleconcept\Packages\Sms\Client\Request\Message\SendMessageRequestInterface as SendMessageRequest;
-use Teleconcept\Packages\Sms\Client\Request\Pincode\CheckPincodeRequestInterface;
-use Teleconcept\Packages\Sms\Client\Response\Credit\CheckCreditResponse;
-use Teleconcept\Packages\Sms\Client\Response\Error\BadRequestResponse;
-use Teleconcept\Packages\Sms\Client\Response\Error\NotFoundResponse;
-use Teleconcept\Packages\Sms\Client\Response\Error\PreconditionFailedResponse;
-use Teleconcept\Packages\Sms\Client\Response\Error\UnauthorizedResponse;
-use Teleconcept\Packages\Sms\Client\Response\Message\CheckMessageResponse;
-use Teleconcept\Packages\Sms\Client\Response\Message\SendMessageResponse;
-use Teleconcept\Packages\Sms\Client\Response\Pincode\CheckPincodeResponse;
-use Teleconcept\Packages\Sms\Client\Response\ResponseInterface as Response;
+use Teleconcept\Sms\Client\Request\Credit\CheckRequestInterface as CheckCreditRequest;
+use Teleconcept\Sms\Client\Request\Message\CheckRequestInterface as CheckMessageRequest;
+use Teleconcept\Sms\Client\Request\Message\CreateRequestInterface as SendMessageRequest;
+use Teleconcept\Sms\Client\Request\Pincode\CheckRequestInterface;
+use Teleconcept\Sms\Client\Response\Credit\CheckCreditResponse;
+use Teleconcept\Sms\Client\Response\Error\BadRequestResponse;
+use Teleconcept\Sms\Client\Response\Error\NotFoundResponse;
+use Teleconcept\Sms\Client\Response\Error\PreconditionFailedResponse;
+use Teleconcept\Sms\Client\Response\Error\UnauthorizedResponse;
+use Teleconcept\Sms\Client\Response\Message\CheckMessageResponse;
+use Teleconcept\Sms\Client\Response\Message\SendMessageResponse;
+use Teleconcept\Sms\Client\Response\Pincode\CheckPincodeResponse;
+use Teleconcept\Sms\Client\Response\ResponseInterface as Response;
 
 /**
  * Class Client
- * @package Teleconcept\Packages\Transaction\Ivr\Client
+ * @package Teleconcept\Sms\Client
  */
 class Client extends GuzzleClient implements ClientInterface
 {
@@ -82,11 +82,11 @@ class Client extends GuzzleClient implements ClientInterface
     }
 
     /**
-     * @param CheckPincodeRequestInterface $request
+     * @param CheckRequestInterface $request
      * @return Response
      * @throws GuzzleException
      */
-    final public function checkPincode(CheckPincodeRequestInterface $request): Response
+    final public function checkPincode(CheckRequestInterface $request): Response
     {
         try {
             $response = $this->send($request);

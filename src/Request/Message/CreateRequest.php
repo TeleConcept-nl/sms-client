@@ -1,17 +1,12 @@
 <?php
-namespace Teleconcept\Packages\Sms\Client\Request\Message;
+namespace Teleconcept\Sms\Client\Request\Message;
 
 use DateTimeImmutable;
-use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
-use Teleconcept\Packages\Sms\Client\ClientInterface as SmsClient;
-use Teleconcept\Packages\Sms\Client\Exception\ValidationException;
-use Teleconcept\Packages\Sms\Client\Request\Request;
-use Teleconcept\Packages\Sms\Client\Response\Error\NotFoundResponse;
-use Teleconcept\Packages\Sms\Client\Response\Error\UnauthorizedResponse;
-use Teleconcept\Packages\Sms\Client\Response\Message\SendMessageResponse;
-use Teleconcept\Packages\Sms\Client\Response\Message\SendMessageResponseInterface;
-use Teleconcept\Packages\Sms\Client\Response\ResponseInterface as Response;
+use Teleconcept\Sms\Client\ClientInterface as SmsClient;
+use Teleconcept\Sms\Client\Exception\ValidationException;
+use Teleconcept\Sms\Client\Request\Request;
+use Teleconcept\Sms\Client\Response\ResponseInterface as Response;
 use function filter_var;
 use function GuzzleHttp\Psr7\stream_for;
 use function is_array;
@@ -20,9 +15,9 @@ use function json_encode;
 
 /**
  * Class CreateRequest
- * @package Teleconcept\Packages\Sms\Client\Request\Message
+ * @package Teleconcept\Sms\Client\Request\Message
  */
-class SendMessageRequest extends Request implements SendMessageRequestInterface
+class CreateRequest extends Request implements CreateRequestInterface
 {
     /**
      * CreateRequest constructor.
@@ -40,13 +35,13 @@ class SendMessageRequest extends Request implements SendMessageRequestInterface
      * @param string $message
      * @param string $originator
      * @param array $recipients
-     * @return SendMessageRequestInterface
+     * @return CreateRequestInterface
      */
     final public function setRequiredParameters(
         string $message,
         string $originator,
         array $recipients
-    ): SendMessageRequestInterface {
+    ): CreateRequestInterface {
         return $this
             ->setOption('message', $message)
             ->setOption('originator', $originator)
@@ -55,18 +50,18 @@ class SendMessageRequest extends Request implements SendMessageRequestInterface
 
     /**
      * @param DateTimeImmutable $scheduledAt
-     * @return SendMessageRequestInterface
+     * @return CreateRequestInterface
      */
-    final public function setScheduledAt(DateTimeImmutable $scheduledAt): SendMessageRequestInterface
+    final public function setScheduledAt(DateTimeImmutable $scheduledAt): CreateRequestInterface
     {
         return $this->setOption('scheduled-at', $scheduledAt->format('Y-m-d H:i:s'));
     }
 
     /**
      * @param string $webhook
-     * @return SendMessageRequestInterface
+     * @return CreateRequestInterface
      */
-    final public function setWebHook(string $webhook): SendMessageRequestInterface
+    final public function setWebHook(string $webhook): CreateRequestInterface
     {
         return $this->setOption('web-hook', $webhook);
     }

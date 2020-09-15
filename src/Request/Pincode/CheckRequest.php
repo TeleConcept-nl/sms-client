@@ -1,25 +1,25 @@
 <?php
-namespace Teleconcept\Packages\Sms\Client\Request\Pincode;
+namespace Teleconcept\Sms\Client\Request\Pincode;
 
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Uri;
-use Teleconcept\Packages\Sms\Client\ClientInterface as SmsClient;
-use Teleconcept\Packages\Sms\Client\Exception\ValidationException;
-use Teleconcept\Packages\Sms\Client\Request\Request;
-use Teleconcept\Packages\Sms\Client\Response\Error\BadRequestResponse;
-use Teleconcept\Packages\Sms\Client\Response\Error\NotFoundResponse;
-use Teleconcept\Packages\Sms\Client\Response\Error\UnauthorizedResponse;
-use Teleconcept\Packages\Sms\Client\Response\Pincode\CheckPincodeResponseInterface as CheckPincodeResponse;
-use Teleconcept\Packages\Sms\Client\Response\ResponseInterface as Response;
+use Teleconcept\Sms\Client\ClientInterface as SmsClient;
+use Teleconcept\Sms\Client\Exception\ValidationException;
+use Teleconcept\Sms\Client\Request\Request;
+use Teleconcept\Sms\Client\Response\Error\BadRequestResponse;
+use Teleconcept\Sms\Client\Response\Error\NotFoundResponse;
+use Teleconcept\Sms\Client\Response\Error\UnauthorizedResponse;
+use Teleconcept\Sms\Client\Response\Pincode\CheckPincodeResponseInterface as CheckPincodeResponse;
+use Teleconcept\Sms\Client\Response\ResponseInterface as Response;
 use function is_int;
 use function is_string;
 use function sprintf;
 
 /**
- * Class CheckPincodeRequest
- * @package Teleconcept\Packages\Sms\Client\Request\Pincode
+ * Class CheckRequest
+ * @package Teleconcept\Sms\Client\Request\Pincode
  */
-class CheckPincodeRequest extends Request implements CheckPincodeRequestInterface
+class CheckRequest extends Request implements CheckRequestInterface
 {
     /**
      * CreateRequest constructor.
@@ -39,7 +39,7 @@ class CheckPincodeRequest extends Request implements CheckPincodeRequestInterfac
      * @param string $country
      * @param string $keyword
      * @param string $pincode
-     * @return CheckPincodeRequestInterface
+     * @return CheckRequestInterface
      */
     final public function setRequiredParameters(
         int $outletId,
@@ -47,7 +47,7 @@ class CheckPincodeRequest extends Request implements CheckPincodeRequestInterfac
         string $country,
         string $pincode,
         string $keyword
-    ): CheckPincodeRequestInterface {
+    ): CheckRequestInterface {
         return $this
             ->setOption('outlet', $outletId)
             ->setOption('shortCode', $shortCode)
