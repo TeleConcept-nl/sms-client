@@ -1,7 +1,7 @@
 {
     "name":"teleconcept/sms-client",
     "type": "library",
-    "description": "Teleconcept SMS Payment Client",
+    "description": "Teleconcept SMS Client",
     "license": "proprietary",
     "minimum-stability": "stable",
     "prefer-stable": true,
