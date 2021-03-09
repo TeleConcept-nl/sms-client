@@ -1,11 +1,13 @@
 <?php
 namespace Teleconcept\Sms\Client;
 
-use Teleconcept\Sms\Client\Request\Credit\CheckRequestInterface as CheckCreditRequest;
-use Teleconcept\Sms\Client\Request\Message\CheckRequestInterface as CheckMessageRequest;
-use Teleconcept\Sms\Client\Request\Message\CreateRequestInterface as SendMessageRequest;
-use Teleconcept\Sms\Client\Request\Pincode\CheckRequestInterface as CheckPincodeRequest;
-use Teleconcept\Sms\Client\Response\ResponseInterface as Response;
+use Teleconcept\Sms\Client\Request\Credit\Check\RequestInterface as CheckCreditRequest;
+use Teleconcept\Sms\Client\Request\Message\Normal\Check\RequestInterface as CheckNormalMessageRequest;
+use Teleconcept\Sms\Client\Request\Message\Normal\Create\RequestInterface as CreateNormalMessageRequest;
+use Teleconcept\Sms\Client\Request\Message\Dcb\Check\RequestInterface as CheckDcbMessageRequest;
+use Teleconcept\Sms\Client\Request\Message\Dcb\Create\RequestInterface as CreateDcbMessageRequest;
+use Teleconcept\Sms\Client\Request\Pincode\Check\RequestInterface as CheckPincodeRequest;
+use Teleconcept\Sms\Client\Response\BaseResponseInterface as Response;
 use GuzzleHttp\Exception\GuzzleException;
 
 /**
@@ -22,23 +24,37 @@ interface ClientInterface extends \GuzzleHttp\ClientInterface
     public function checkCredit(CheckCreditRequest $request): Response;
 
     /**
-     * @param CheckMessageRequest $request
-     * @return Response
-     * @throws GuzzleException
-     */
-    public function checkMessage(CheckMessageRequest $request): Response;
-
-    /**
-     * @param SendMessageRequest $request
-     * @return Response
-     * @throws GuzzleException
-     */
-    public function sendMessage(SendMessageRequest $request): Response;
-
-    /**
      * @param CheckPincodeRequest $request
      * @return Response
      * @throws GuzzleException
      */
     public function checkPincode(CheckPincodeRequest $request): Response;
+
+    /**
+     * @param CheckNormalMessageRequest $request
+     * @return Response
+     * @throws GuzzleException
+     */
+    public function checkNormalMessage(CheckNormalMessageRequest $request): Response;
+
+    /**
+     * @param CreateNormalMessageRequest $request
+     * @return Response
+     * @throws GuzzleException
+     */
+    public function createNormalMessage(CreateNormalMessageRequest $request): Response;
+
+    /**
+     * @param CheckDcbMessageRequest $request
+     * @return Response
+     * @throws GuzzleException
+     */
+    public function checkDcbMessage(CheckDcbMessageRequest $request): Response;
+
+    /**
+     * @param CreateDcbMessageRequest $request
+     * @return Response
+     * @throws GuzzleException
+     */
+    public function createDcbMessage(CreateDcbMessageRequest $request): Response;
 }

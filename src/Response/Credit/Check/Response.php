@@ -1,35 +1,24 @@
 <?php
-namespace Teleconcept\Sms\Client\Response\Credit;
+namespace Teleconcept\Sms\Client\Response\Credit\Check;
 
-use Psr\Http\Message\ResponseInterface;
+use Teleconcept\Sms\Client\Response\Credit\PurchaseInterface as Purchase;
 use function json_decode;
 
 /**
- * Class CheckMessageResponse
- * @package Teleconcept\Sms\Client\Response\Message
+ * Class Response
+ * @package Teleconcept\Sms\Client\Response\Credit\Check
  */
-class CheckCreditResponse implements CheckCreditResponseInterface
+class Response implements ResponseInterface
 {
-    /**
-     * @var Purchase[]
-     */
-    private $purchases = [];
+    private array $purchases = [];
+    private int $available;
+    private int $total;
 
     /**
-     * @var int
+     * Response constructor.
+     * @param \Psr\Http\Message\ResponseInterface $response
      */
-    private $available;
-
-    /**
-     * @var int
-     */
-    private $total;
-
-    /**
-     * SendMessageResponse constructor.
-     * @param ResponseInterface $response
-     */
-    public function __construct(ResponseInterface $response)
+    public function __construct(\Psr\Http\Message\ResponseInterface $response)
     {
         $content = json_decode($response->getBody()->getContents(), true);
 
@@ -47,7 +36,7 @@ class CheckCreditResponse implements CheckCreditResponseInterface
      */
     private function createMessage(array $message): Purchase
     {
-        return new Purchase(
+        return new \Teleconcept\Sms\Client\Response\Credit\Purchase(
             $message['reference'],
             $message['total'],
             $message['available'],
@@ -56,7 +45,7 @@ class CheckCreditResponse implements CheckCreditResponseInterface
     }
 
     /**
-     * @return Purchase[]
+     * @return Purchase[]|array
      */
     final public function purchases(): array
     {

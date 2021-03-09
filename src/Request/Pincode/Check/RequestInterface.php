@@ -1,13 +1,13 @@
 <?php
-namespace Teleconcept\Sms\Client\Request\Pincode;
+namespace Teleconcept\Sms\Client\Request\Pincode\Check;
 
-use Teleconcept\Sms\Client\Request\RequestInterface;
+use Teleconcept\Sms\Client\Request\RequestInterface as BaseRequestInterface;
 
 /**
- * Interface CheckRequestInterface
- * @package Teleconcept\Sms\Client\Request\Pincode
+ * Interface RequestInterface
+ * @package Teleconcept\Sms\Client\Request\Pincode\Check
  */
-interface CheckRequestInterface extends RequestInterface
+interface RequestInterface extends BaseRequestInterface
 {
     /**
      * @param int $outletId
@@ -15,7 +15,7 @@ interface CheckRequestInterface extends RequestInterface
      * @param string $country
      * @param string $pincode
      * @param string $keyword
-     * @return CheckRequestInterface
+     * @return RequestInterface
      */
     public function setRequiredParameters(
         int $outletId,
@@ -23,5 +23,5 @@ interface CheckRequestInterface extends RequestInterface
         string $country,
         string $pincode,
         string $keyword
-    ): CheckRequestInterface;
+    ): RequestInterface;
 }

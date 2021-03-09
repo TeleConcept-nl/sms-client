@@ -1,21 +1,22 @@
 <?php
-namespace Teleconcept\Sms\Client\Request\Credit;
+namespace Teleconcept\Sms\Client\Request\Message\Normal\Check;
 
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Uri;
 use Teleconcept\Sms\Client\ClientInterface as SmsClient;
 use Teleconcept\Sms\Client\Exception\ValidationException;
-use Teleconcept\Sms\Client\Request\Request;
-use Teleconcept\Sms\Client\Response\Credit\CheckCreditResponse;
-use Teleconcept\Sms\Client\Response\ResponseInterface as Response;
+use Teleconcept\Sms\Client\Request\Request as BaseRequest;
+use Teleconcept\Sms\Client\Response\BaseResponseInterface as Response;
+use function GuzzleHttp\Psr7\stream_for;
 use function is_int;
 use function is_string;
+use function json_encode;
 
 /**
- * Class CheckCreditRequest
- * @package Teleconcept\Sms\Client\Request\Credit
+ * Class CheckRequest
+ * @package Teleconcept\Sms\Client\Request\Message
  */
-class CheckRequest extends Request implements CheckRequestInterface
+class Request extends BaseRequest implements RequestInterface
 {
     /**
      * CreateRequest constructor.
@@ -24,13 +25,21 @@ class CheckRequest extends Request implements CheckRequestInterface
      */
     public function __construct(SmsClient $client, array $options = [])
     {
-        parent::__construct('GET', '/credits');
+        parent::__construct('GET', '/messages/normal');
         $this->client = $client;
         $this->options = $options;
     }
 
     /**
-     * @return CheckCreditResponse|
+     * @inheritDoc
+     */
+    final public function setReference(string $reference): RequestInterface
+    {
+        return $this->setOption('reference', $reference);
+    }
+
+    /**
+     * @return Response
      * @throws ValidationException
      * @throws GuzzleException
      */
@@ -42,14 +51,17 @@ class CheckRequest extends Request implements CheckRequestInterface
             throw new ValidationException($errors);
         }
 
-        $uri = new Uri('/credits');
-        $request = $this->withUri($uri);
+        $body = stream_for(json_encode($this->options));
+        $uri = new Uri('/messages/normal/'. $this->options['reference']);
+        $request = $this
+            ->withUri($uri)
+            ->withBody($body);
 
         foreach ($this->headers as $header => $value) {
             $request = $request->withAddedHeader($header, $value);
         }
 
-        return $this->client->checkCredit($request);
+        return $this->client->checkNormalMessage($request);
     }
 
     /**
@@ -57,6 +69,7 @@ class CheckRequest extends Request implements CheckRequestInterface
      */
     private function validate(): array
     {
+        $options = $this->options;
         $headers = $this->headers;
         $errors = [];
 
@@ -68,6 +81,10 @@ class CheckRequest extends Request implements CheckRequestInterface
             $errors['organization'] = 'was not set.';
         } elseif ($headers['Organization'] < 1) {
             $errors['organization'] = 'was set but was invalid.';
+        }
+
+        if (!isset($options['reference'])) {
+            $errors['reference'] = 'was not set.';
         }
 
         return $errors;

@@ -11,20 +11,9 @@ use function array_key_exists;
  */
 abstract class Request extends Psr7Request implements RequestInterface
 {
-    /**
-     * @var SmsClient
-     */
-    protected $client;
-
-    /**
-     * @var array
-     */
-    protected $options;
-
-    /**
-     * @var array
-     */
-    protected $headers = [
+    protected SmsClient $client;
+    protected array $options = [];
+    protected array $headers = [
         'Content-Type' => 'application/json',
         'Authorization' => null,
         'Organization' => null

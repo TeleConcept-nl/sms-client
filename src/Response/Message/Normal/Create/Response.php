@@ -1,25 +1,22 @@
 <?php
-namespace Teleconcept\Sms\Client\Response\Message;
+namespace Teleconcept\Sms\Client\Response\Message\Normal\Create;
 
-use Psr\Http\Message\ResponseInterface;
+use Teleconcept\Sms\Client\Response\Message\Normal\MessageInterface as Message;
 use function json_decode;
 
 /**
- * Class CreateResponse
- * @package Teleconcept\Sms\Client\Response\Message
+ * Class SendMessageResponse
+ * @package Teleconcept\Sms\Client\Response\Message\Normal\Send
  */
-class SendMessageResponse implements SendMessageResponseInterface
+class Response implements ResponseInterface
 {
-    /**
-     * @var Message[]
-     */
-    private $messages = [];
+    private array $messages = [];
 
     /**
-     * SendMessageResponse constructor.
-     * @param ResponseInterface $response
+     * Response constructor.
+     * @param \Psr\Http\Message\ResponseInterface $response
      */
-    public function __construct(ResponseInterface $response)
+    public function __construct(\Psr\Http\Message\ResponseInterface $response)
     {
         $content = json_decode($response->getBody()->getContents(), true);
         foreach ($content['data']['messages'] as $message) {
@@ -33,7 +30,7 @@ class SendMessageResponse implements SendMessageResponseInterface
      */
     private function createMessage(array $message): Message
     {
-        return new Message(
+        return new \Teleconcept\Sms\Client\Response\Message\Normal\Message(
             $message['reference'],
             $message['status'],
             $message['originator'],

@@ -10,25 +10,12 @@ use function date_create_immutable;
  */
 class Purchase implements PurchaseInterface
 {
-    /**
-     * @var string
-     */
-    private $reference;
+    private int $total;
+    private int $available;
 
-    /**
-     * @var DateTimeImmutable
-     */
-    private $createdAt;
+    private string $reference;
 
-    /**
-     * @var int
-     */
-    private $available;
-
-    /**
-     * @var int
-     */
-    private $total;
+    private DateTimeImmutable $createdAt;
 
     /**
      * Purchase constructor.

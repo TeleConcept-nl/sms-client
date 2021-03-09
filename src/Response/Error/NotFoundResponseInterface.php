@@ -1,14 +1,13 @@
 <?php
 namespace Teleconcept\Sms\Client\Response\Error;
 
-
-use Teleconcept\Sms\Client\Response\ResponseInterface;
+use Teleconcept\Sms\Client\Response\BaseResponseInterface;
 
 /**
- * Class NotFoundResponse
+ * Interface NotFoundResponseInterface
  * @package Teleconcept\Sms\Client\Response\Error
  */
-interface NotFoundResponseInterface extends ResponseInterface
+interface NotFoundResponseInterface extends BaseResponseInterface
 {
     /**
      * @return string

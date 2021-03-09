@@ -1,12 +1,12 @@
 <?php
-namespace Teleconcept\Sms\Client\Request\Message;
+namespace Teleconcept\Sms\Client\Request\Message\Dcb\Create;
 
 use DateTimeImmutable;
 use GuzzleHttp\Exception\GuzzleException;
 use Teleconcept\Sms\Client\ClientInterface as SmsClient;
 use Teleconcept\Sms\Client\Exception\ValidationException;
-use Teleconcept\Sms\Client\Request\Request;
-use Teleconcept\Sms\Client\Response\ResponseInterface as Response;
+use Teleconcept\Sms\Client\Request\Request as BaseRequest;
+use Teleconcept\Sms\Client\Response\BaseResponseInterface as Response;
 use function filter_var;
 use function GuzzleHttp\Psr7\stream_for;
 use function is_array;
@@ -17,7 +17,7 @@ use function json_encode;
  * Class CreateRequest
  * @package Teleconcept\Sms\Client\Request\Message
  */
-class CreateRequest extends Request implements CreateRequestInterface
+class Request extends BaseRequest implements RequestInterface
 {
     /**
      * CreateRequest constructor.
@@ -26,7 +26,7 @@ class CreateRequest extends Request implements CreateRequestInterface
      */
     public function __construct(SmsClient $client, array $options = [])
     {
-        parent::__construct('POST', '/messages');
+        parent::__construct('POST', '/messages/dcb');
         $this->client = $client;
         $this->options = $options;
     }
@@ -35,13 +35,13 @@ class CreateRequest extends Request implements CreateRequestInterface
      * @param string $message
      * @param string $originator
      * @param array $recipients
-     * @return CreateRequestInterface
+     * @return RequestInterface
      */
     final public function setRequiredParameters(
         string $message,
         string $originator,
         array $recipients
-    ): CreateRequestInterface {
+    ): RequestInterface {
         return $this
             ->setOption('message', $message)
             ->setOption('originator', $originator)
@@ -50,18 +50,18 @@ class CreateRequest extends Request implements CreateRequestInterface
 
     /**
      * @param DateTimeImmutable $scheduledAt
-     * @return CreateRequestInterface
+     * @return RequestInterface
      */
-    final public function setScheduledAt(DateTimeImmutable $scheduledAt): CreateRequestInterface
+    final public function setScheduledAt(DateTimeImmutable $scheduledAt): RequestInterface
     {
         return $this->setOption('scheduled-at', $scheduledAt->format('Y-m-d H:i:s'));
     }
 
     /**
      * @param string $webhook
-     * @return CreateRequestInterface
+     * @return RequestInterface
      */
-    final public function setWebHook(string $webhook): CreateRequestInterface
+    final public function setWebHook(string $webhook): RequestInterface
     {
         return $this->setOption('web-hook', $webhook);
     }
@@ -86,7 +86,7 @@ class CreateRequest extends Request implements CreateRequestInterface
             $request = $request->withAddedHeader($header, $value);
         }
 
-        return $this->client->sendMessage($request);
+        return $this->client->createNormalMessage($request);
     }
 
     /**

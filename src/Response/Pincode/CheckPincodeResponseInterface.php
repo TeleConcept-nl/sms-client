@@ -2,13 +2,13 @@
 namespace Teleconcept\Sms\Client\Response\Pincode;
 
 use DateTimeImmutable;
-use Teleconcept\Sms\Client\Response\ResponseInterface;
+use Teleconcept\Sms\Client\Response\BaseResponseInterface;
 
 /**
  * Interface CheckPincodeResponse
  * @package Teleconcept\Sms\Client\Response\Pincode
  */
-interface CheckPincodeResponseInterface extends ResponseInterface
+interface CheckPincodeResponseInterface extends BaseResponseInterface
 {
     /**
      * @return int

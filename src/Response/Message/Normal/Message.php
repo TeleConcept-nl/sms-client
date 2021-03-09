@@ -1,54 +1,25 @@
 <?php
-namespace Teleconcept\Sms\Client\Response\Message;
+namespace Teleconcept\Sms\Client\Response\Message\Normal;
 
 use DateTimeImmutable;
 use function date_create_immutable;
 
 /**
  * Class Message
- * @package Teleconcept\Sms\Client\Response\Message
+ * @package Teleconcept\Sms\Client\Response\Message\Normal
  */
 class Message implements MessageInterface
 {
-    /**
-     * @var string
-     */
-    private $reference;
+    private int $texts;
 
-    /**
-     * @var string
-     */
-    private $status;
+    private string $reference;
+    private string $status;
+    private string $originator;
+    private string $recipient;
+    private string $encoding;
+    private string $body;
 
-    /**
-     * @var string
-     */
-    private $originator;
-
-    /**
-     * @var string
-     */
-    private $recipient;
-
-    /**
-     * @var string
-     */
-    private $encoding;
-
-    /**
-     * @var string
-     */
-    private $body;
-
-    /**
-     * @var DateTimeImmutable|false
-     */
-    private $scheduledAt;
-
-    /**
-     * @var int
-     */
-    private $texts;
+    private DateTimeImmutable $scheduledAt;
 
     /**
      * Message constructor.

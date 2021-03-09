@@ -13,50 +13,17 @@ use function json_decode;
  */
 class CheckPincodeResponse implements CheckPincodeResponseInterface
 {
-    /**
-     * @var int
-     */
-    private $organizationId;
+    private int $organizationId;
+    private int $mobileOriginatorId;
 
-    /**
-     * @var string
-     */
-    private $reference;
+    private string $reference;
+    private string $ipAddress;
+    private string $shortCode;
+    private string $keyword;
+    private string $pincode;
 
-    /**
-     * @var int
-     */
-    private $mobileOriginatorId;
-
-    /**
-     * @var string
-     */
-    private $ipAddress;
-
-    /**
-     * @var string
-     */
-    private $shortCode;
-
-    /**
-     * @var string
-     */
-    private $keyword;
-
-    /**
-     * @var string
-     */
-    private $pincode;
-
-    /**
-     * @var DateTimeImmutable
-     */
-    private $createdAt;
-
-    /**
-     * @var DateTimeImmutable
-     */
-    private $reportedAt;
+    private DateTimeImmutable $createdAt;
+    private DateTimeImmutable $reportedAt;
 
     /**
      * CheckPincodeResponse constructor.

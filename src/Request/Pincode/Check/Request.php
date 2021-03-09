@@ -1,25 +1,25 @@
 <?php
-namespace Teleconcept\Sms\Client\Request\Pincode;
+namespace Teleconcept\Sms\Client\Request\Pincode\Check;
 
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Uri;
 use Teleconcept\Sms\Client\ClientInterface as SmsClient;
 use Teleconcept\Sms\Client\Exception\ValidationException;
-use Teleconcept\Sms\Client\Request\Request;
+use Teleconcept\Sms\Client\Request\Request as BaseRequest;
 use Teleconcept\Sms\Client\Response\Error\BadRequestResponse;
 use Teleconcept\Sms\Client\Response\Error\NotFoundResponse;
 use Teleconcept\Sms\Client\Response\Error\UnauthorizedResponse;
 use Teleconcept\Sms\Client\Response\Pincode\CheckPincodeResponseInterface as CheckPincodeResponse;
-use Teleconcept\Sms\Client\Response\ResponseInterface as Response;
+use Teleconcept\Sms\Client\Response\BaseResponseInterface as Response;
 use function is_int;
 use function is_string;
 use function sprintf;
 
 /**
  * Class CheckRequest
- * @package Teleconcept\Sms\Client\Request\Pincode
+ * @package Teleconcept\Sms\Client\Request\Pincode\Check
  */
-class CheckRequest extends Request implements CheckRequestInterface
+class Request extends BaseRequest implements RequestInterface
 {
     /**
      * CreateRequest constructor.
@@ -39,7 +39,7 @@ class CheckRequest extends Request implements CheckRequestInterface
      * @param string $country
      * @param string $keyword
      * @param string $pincode
-     * @return CheckRequestInterface
+     * @return RequestInterface
      */
     final public function setRequiredParameters(
         int $outletId,
@@ -47,7 +47,7 @@ class CheckRequest extends Request implements CheckRequestInterface
         string $country,
         string $pincode,
         string $keyword
-    ): CheckRequestInterface {
+    ): RequestInterface {
         return $this
             ->setOption('outlet', $outletId)
             ->setOption('shortCode', $shortCode)

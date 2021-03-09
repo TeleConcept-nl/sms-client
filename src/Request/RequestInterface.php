@@ -1,7 +1,7 @@
 <?php
 namespace Teleconcept\Sms\Client\Request;
 
-use Teleconcept\Sms\Client\Response\ResponseInterface as Response;
+use Teleconcept\Sms\Client\Response\BaseResponseInterface as Response;
 
 /**
  * Interface RequestInterface
@@ -11,10 +11,10 @@ interface RequestInterface extends \Psr\Http\Message\RequestInterface
 {
     /**
      * @param string $apiToken
-     * @param int $outletId
+     * @param int $organizationId
      * @return RequestInterface
      */
-    public function setAuthorization(string $apiToken, int $outletId): RequestInterface;
+    public function setAuthorization(string $apiToken, int $organizationId): RequestInterface;
 
     /**
      * @param string $option

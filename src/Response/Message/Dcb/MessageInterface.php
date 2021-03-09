@@ -1,11 +1,11 @@
 <?php
-namespace Teleconcept\Sms\Client\Response\Message;
+namespace Teleconcept\Sms\Client\Response\Message\Dcb;
 
 use DateTimeImmutable;
 
 /**
- * Class Message
- * @package Teleconcept\Sms\Client\Response\Message
+ * Interface MessageInterface
+ * @package Teleconcept\Sms\Client\Response\Message\Dcb
  */
 interface MessageInterface
 {
@@ -32,20 +32,10 @@ interface MessageInterface
     /**
      * @return string
      */
-    public function encoding(): string;
+    public function body(): string;
 
     /**
      * @return string
      */
-    public function body(): string;
-
-    /**
-     * @return DateTimeImmutable|null
-     */
-    public function scheduledAt(): ?DateTimeImmutable;
-
-    /**
-     * @return int
-     */
-    public function texts(): int;
+    public function operator(): string;
 }

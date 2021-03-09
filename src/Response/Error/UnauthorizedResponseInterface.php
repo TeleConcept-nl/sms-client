@@ -1,10 +1,10 @@
 <?php
 namespace Teleconcept\Sms\Client\Response\Error;
 
-use Teleconcept\Sms\Client\Response\ResponseInterface as Response;
+use Teleconcept\Sms\Client\Response\BaseResponseInterface as Response;
 
 /**
- * Class UnauthorizedResponse
+ * Interface UnauthorizedResponseInterface
  * @package Teleconcept\Sms\Client\Response\Error
  */
 interface UnauthorizedResponseInterface extends Response
