@@ -1,7 +1,6 @@
 <?php
 namespace Teleconcept\Sms\Client\Request\Message\Dcb\Create;
 
-use DateTimeImmutable;
 use GuzzleHttp\Exception\GuzzleException;
 use Teleconcept\Sms\Client\ClientInterface as SmsClient;
 use Teleconcept\Sms\Client\Exception\ValidationException;
@@ -57,55 +56,10 @@ class Request extends BaseRequest implements RequestInterface
         string $recipient
     ): RequestInterface {
         return $this
-            ->setOrganizationId($organizationId)
-            ->setMessage($message)
-            ->setOriginator($originator)
-            ->setRecipient($recipient);
-    }
-
-    /**
-     * @param int $organizationId
-     * @return RequestInterface
-     */
-    final public function setOrganizationId(int $organizationId): RequestInterface
-    {
-        return $this->setOption('organization-id', $organizationId);
-    }
-
-    /**
-     * @param string $originator
-     * @return RequestInterface
-     */
-    final public function setOriginator(string $originator): RequestInterface
-    {
-        return $this->setOption('originator', $originator);
-    }
-
-    /**
-     * @param string $recipient
-     * @return RequestInterface
-     */
-    final public function setRecipient(string $recipient): RequestInterface
-    {
-        return $this->setOption('recipient', $recipient);
-    }
-
-    /**
-     * @param string $message
-     * @return RequestInterface
-     */
-    final public function setMessage(string $message): RequestInterface
-    {
-        return $this->setOption('message', $message);
-    }
-
-    /**
-     * @param DateTimeImmutable $scheduledAt
-     * @return RequestInterface
-     */
-    final public function setScheduledAt(DateTimeImmutable $scheduledAt): RequestInterface
-    {
-        return $this->setOption('scheduled-at', $scheduledAt->format('Y-m-d H:i:s'));
+            ->setOption('organization-id', $organizationId)
+            ->setOption('message', $message)
+            ->setOption('originator', $originator)
+            ->setOption('recipient', $recipient);
     }
 
     /**

@@ -25,36 +25,6 @@ interface RequestInterface extends BaseRequestInterface
     ): RequestInterface;
 
     /**
-     * @param int $organizationId
-     * @return RequestInterface
-     */
-    public function setOrganizationId(int $organizationId): RequestInterface;
-
-    /**
-     * @param string $originator
-     * @return RequestInterface
-     */
-    public function setOriginator(string $originator): RequestInterface;
-
-    /**
-     * @param string $recipient
-     * @return RequestInterface
-     */
-    public function setRecipient(string $recipient): RequestInterface;
-
-    /**
-     * @param string $message
-     * @return RequestInterface
-     */
-    public function setMessage(string $message): RequestInterface;
-
-    /**
-     * @param DateTimeImmutable $scheduledAt
-     * @return RequestInterface
-     */
-    public function setScheduledAt(DateTimeImmutable $scheduledAt): RequestInterface;
-
-    /**
      * @param string $reportUrl
      * @return RequestInterface
      */
