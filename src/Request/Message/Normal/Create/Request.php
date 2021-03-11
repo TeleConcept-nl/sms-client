@@ -12,6 +12,7 @@ use function GuzzleHttp\Psr7\stream_for;
 use function is_array;
 use function is_int;
 use function json_encode;
+use function strlen;
 
 /**
  * Class CreateRequest
@@ -116,8 +117,10 @@ class Request extends BaseRequest implements RequestInterface
             $errors['organization'] = 'was set but was invalid.';
         }
 
-        if ($options['originator'] === null) {
+        if (!isset($options['originator'])) {
             $errors['originator'] = 'was not set.';
+        } elseif (strlen($options['originator']) < 1 || strlen($options['originator']) > 11) {
+            $errors['originator'] = 'was set but needs to be between 1 and 11 characters long.';
         }
 
         if (isset($options['report-url']) && !filter_var($options['report-url'], FILTER_VALIDATE_URL)) {
