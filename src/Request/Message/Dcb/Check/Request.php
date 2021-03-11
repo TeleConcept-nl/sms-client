@@ -18,6 +18,11 @@ use function json_encode;
  */
 class Request extends BaseRequest implements RequestInterface
 {
+    protected array $headers = [
+        'Content-Type' => 'application/json',
+        'System-Authorization' => null
+    ];
+
     /**
      * CreateRequest constructor.
      * @param SmsClient $client
@@ -37,6 +42,16 @@ class Request extends BaseRequest implements RequestInterface
     {
         return $this->setOption('reference', $reference);
     }
+
+    /**
+     * @param string $authorizationToken
+     * @return RequestInterface
+     */
+    final public function setRequiredHeaders(string $authorizationToken): RequestInterface
+    {
+        return $this->setHeader('System-Authorization', $authorizationToken);
+    }
+
 
     /**
      * @return Response
@@ -61,7 +76,7 @@ class Request extends BaseRequest implements RequestInterface
             $request = $request->withAddedHeader($header, $value);
         }
 
-        return $this->client->checkNormalMessage($request);
+        return $this->client->checkDcbMessage($request);
     }
 
     /**
@@ -73,14 +88,8 @@ class Request extends BaseRequest implements RequestInterface
         $headers = $this->headers;
         $errors = [];
 
-        if (!is_string($headers['Authorization'])) {
+        if (!is_string($headers['System-Authorization'])) {
             $errors['apiKey'] = 'was not set.';
-        }
-
-        if (!is_int($headers['Organization'])) {
-            $errors['organization'] = 'was not set.';
-        } elseif ($headers['Organization'] < 1) {
-            $errors['organization'] = 'was set but was invalid.';
         }
 
         if (!isset($options['reference'])) {

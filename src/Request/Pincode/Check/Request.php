@@ -57,6 +57,18 @@ class Request extends BaseRequest implements RequestInterface
     }
 
     /**
+     * @param string $authorizationToken
+     * @param int $organizationId
+     * @return RequestInterface
+     */
+    final public function setRequiredHeaders(string $authorizationToken, int $organizationId): RequestInterface {
+        return $this
+            ->setHeader('Authorization', $authorizationToken)
+            ->setHeader('Organization', $organizationId);
+    }
+
+
+    /**
      * @return CheckPincodeResponse|NotFoundResponse|UnauthorizedResponse|BadRequestResponse
      * @throws GuzzleException
      * @throws ValidationException

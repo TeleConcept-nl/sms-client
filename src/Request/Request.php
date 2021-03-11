@@ -20,14 +20,15 @@ abstract class Request extends Psr7Request implements RequestInterface
     ];
 
     /**
-     * @param string $apiToken
-     * @param int $organizationId
+     * @param string $header
+     * @param $value
      * @return RequestInterface
      */
-    final public function setAuthorization(string $apiToken, int $organizationId): RequestInterface
+    final public function setHeader(string $header, string $value): RequestInterface
     {
-        $this->headers['Authorization'] = 'Bearer ' . $apiToken;
-        $this->headers['Organization'] = $organizationId;
+        if (array_key_exists($header, $this->headers) && $this->headers[$header] !== $value) {
+            $this->headers[$header] = $value;
+        }
 
         return $this;
     }
@@ -37,7 +38,7 @@ abstract class Request extends Psr7Request implements RequestInterface
      * @param mixed $value
      * @return RequestInterface
      */
-    final public function setOption(string $option, $value): RequestInterface
+    final public function setOption(string $option, string $value): RequestInterface
     {
         if (!array_key_exists($option, $this->options) || $this->options[$option] !== $value) {
             $this->options[$option] = $value;

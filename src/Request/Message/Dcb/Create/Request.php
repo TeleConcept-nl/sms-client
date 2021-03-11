@@ -9,8 +9,6 @@ use Teleconcept\Sms\Client\Request\Request as BaseRequest;
 use Teleconcept\Sms\Client\Response\BaseResponseInterface as Response;
 use function filter_var;
 use function GuzzleHttp\Psr7\stream_for;
-use function is_array;
-use function is_int;
 use function json_encode;
 
 /**
@@ -19,6 +17,11 @@ use function json_encode;
  */
 class Request extends BaseRequest implements RequestInterface
 {
+    protected array $headers = [
+        'Content-Type' => 'application/json',
+        'System-Authorization' => null
+    ];
+
     /**
      * CreateRequest constructor.
      * @param SmsClient $client
@@ -32,20 +35,68 @@ class Request extends BaseRequest implements RequestInterface
     }
 
     /**
+     * @param string $authorizationToken
+     * @return RequestInterface
+     */
+    final public function setRequiredHeaders(string $authorizationToken): RequestInterface
+    {
+        return $this->setHeader('System-Authorization', $authorizationToken);
+    }
+
+    /**
+     * @param int $organizationId
      * @param string $message
      * @param string $originator
-     * @param array $recipients
+     * @param string $recipient
      * @return RequestInterface
      */
     final public function setRequiredParameters(
+        int $organizationId,
         string $message,
         string $originator,
-        array $recipients
+        string $recipient
     ): RequestInterface {
         return $this
-            ->setOption('message', $message)
-            ->setOption('originator', $originator)
-            ->setOption('recipients', $recipients);
+            ->setOrganizationId($organizationId)
+            ->setMessage($message)
+            ->setOriginator($originator)
+            ->setRecipient($recipient);
+    }
+
+    /**
+     * @param int $organizationId
+     * @return RequestInterface
+     */
+    final public function setOrganizationId(int $organizationId): RequestInterface
+    {
+        return $this->setOption('organization-id', $organizationId);
+    }
+
+    /**
+     * @param string $originator
+     * @return RequestInterface
+     */
+    final public function setOriginator(string $originator): RequestInterface
+    {
+        return $this->setOption('originator', $originator);
+    }
+
+    /**
+     * @param string $recipient
+     * @return RequestInterface
+     */
+    final public function setRecipient(string $recipient): RequestInterface
+    {
+        return $this->setOption('recipient', $recipient);
+    }
+
+    /**
+     * @param string $message
+     * @return RequestInterface
+     */
+    final public function setMessage(string $message): RequestInterface
+    {
+        return $this->setOption('message', $message);
     }
 
     /**
@@ -58,12 +109,12 @@ class Request extends BaseRequest implements RequestInterface
     }
 
     /**
-     * @param string $webhook
+     * @param string $reportUrl
      * @return RequestInterface
      */
-    final public function setWebHook(string $webhook): RequestInterface
+    final public function setReportUrl(string $reportUrl): RequestInterface
     {
-        return $this->setOption('web-hook', $webhook);
+        return $this->setOption('web-hook', $reportUrl);
     }
 
     /**
@@ -86,7 +137,7 @@ class Request extends BaseRequest implements RequestInterface
             $request = $request->withAddedHeader($header, $value);
         }
 
-        return $this->client->createNormalMessage($request);
+        return $this->client->createDcbMessage($request);
     }
 
     /**
@@ -98,28 +149,28 @@ class Request extends BaseRequest implements RequestInterface
         $headers = $this->headers;
         $errors = [];
 
-        if ($headers['Authorization'] === null) {
+        if ($headers['System-Authorization'] === null) {
             $errors['apiKey'] = 'was not set.';
         }
 
-        if (!is_int($headers['Organization'])) {
-            $errors['organization'] = 'was not set.';
-        } elseif ($headers['Organization'] < 1) {
-            $errors['organization'] = 'was set but was invalid.';
+        if ($options['organization-id'] < 1) {
+            $errors['organization-id'] = 'was set but was invalid.';
         }
 
         if ($options['originator'] === null) {
             $errors['originator'] = 'was not set.';
         }
 
-        if (isset($options['web-hook']) && !filter_var($options['report-url'], FILTER_VALIDATE_URL)) {
-            $errors['webHook'] = 'was set but invalid url was supplied.';
+        if (isset($options['report-url']) && !filter_var($options['report-url'], FILTER_VALIDATE_URL)) {
+            $errors['reportUrl'] = 'was set but invalid url was supplied.';
         }
 
-        if (!is_array($options['recipients'])) {
-            $errors['recipients'] = 'was not supplied.';
-        } elseif (empty($options['recipients'])) {
-            $errors['recipients'] = 'was supplied but empty.';
+        if (empty($options['recipient'])) {
+            $errors['recipient'] = 'was supplied but empty.';
+        }
+
+        if (empty($options['message'])) {
+            $errors['message'] = 'was supplied but empty.';
         }
 
         return $errors;

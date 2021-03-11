@@ -10,18 +10,18 @@ use Teleconcept\Sms\Client\Response\BaseResponseInterface as Response;
 interface RequestInterface extends \Psr\Http\Message\RequestInterface
 {
     /**
-     * @param string $apiToken
-     * @param int $organizationId
+     * @param string $option
+     * @param string $value
      * @return RequestInterface
      */
-    public function setAuthorization(string $apiToken, int $organizationId): RequestInterface;
+    public function setOption(string $option, string $value): RequestInterface;
 
     /**
-     * @param string $option
-     * @param mixed $value
+     * @param string $header
+     * @param string $value
      * @return RequestInterface
      */
-    public function setOption(string $option, $value): RequestInterface;
+    public function setHeader(string $header, string $value): RequestInterface;
 
     /**
      * @return Response

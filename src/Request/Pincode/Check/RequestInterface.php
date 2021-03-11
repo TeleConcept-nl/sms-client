@@ -24,4 +24,11 @@ interface RequestInterface extends BaseRequestInterface
         string $pincode,
         string $keyword
     ): RequestInterface;
+
+    /**
+     * @param string $authorizationToken
+     * @param int $organizationId
+     * @return RequestInterface
+     */
+    public function setRequiredHeaders(string $authorizationToken, int $organizationId): RequestInterface;
 }

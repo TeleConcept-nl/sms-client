@@ -14,4 +14,10 @@ interface RequestInterface extends BaseRequestInterface
      * @return RequestInterface
      */
     public function setReference(string $reference): RequestInterface;
+
+    /**
+     * @param string $authorizationToken
+     * @return RequestInterface
+     */
+    public function setRequiredHeaders(string $authorizationToken): RequestInterface;
 }

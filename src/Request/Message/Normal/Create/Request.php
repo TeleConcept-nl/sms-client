@@ -37,15 +37,23 @@ class Request extends BaseRequest implements RequestInterface
      * @param array $recipients
      * @return RequestInterface
      */
-    final public function setRequiredParameters(
-        string $message,
-        string $originator,
-        array $recipients
-    ): RequestInterface {
+    final public function setRequiredParameters(string $message, string $originator, array $recipients): RequestInterface
+    {
         return $this
             ->setOption('message', $message)
             ->setOption('originator', $originator)
             ->setOption('recipients', $recipients);
+    }
+
+    /**
+     * @param string $authorizationToken
+     * @param int $organizationId
+     * @return RequestInterface
+     */
+    final public function setRequiredHeaders(string $authorizationToken, int $organizationId): RequestInterface {
+        return $this
+            ->setHeader('Authorization', $authorizationToken)
+            ->setHeader('Organization', $organizationId);
     }
 
     /**
@@ -58,12 +66,12 @@ class Request extends BaseRequest implements RequestInterface
     }
 
     /**
-     * @param string $webhook
+     * @param string $reportUrl
      * @return RequestInterface
      */
-    final public function setWebHook(string $webhook): RequestInterface
+    final public function setReportUrl(string $reportUrl): RequestInterface
     {
-        return $this->setOption('web-hook', $webhook);
+        return $this->setOption('report-url', $reportUrl);
     }
 
     /**
@@ -112,8 +120,8 @@ class Request extends BaseRequest implements RequestInterface
             $errors['originator'] = 'was not set.';
         }
 
-        if (isset($options['web-hook']) && !filter_var($options['report-url'], FILTER_VALIDATE_URL)) {
-            $errors['webHook'] = 'was set but invalid url was supplied.';
+        if (isset($options['report-url']) && !filter_var($options['report-url'], FILTER_VALIDATE_URL)) {
+            $errors['reportUrl'] = 'was set but invalid url was supplied.';
         }
 
         if (!is_array($options['recipients'])) {

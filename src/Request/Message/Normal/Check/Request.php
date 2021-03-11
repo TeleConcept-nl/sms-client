@@ -31,6 +31,17 @@ class Request extends BaseRequest implements RequestInterface
     }
 
     /**
+     * @param string $authorizationToken
+     * @param int $organizationId
+     * @return RequestInterface
+     */
+    final public function setRequiredHeaders(string $authorizationToken, int $organizationId): RequestInterface {
+        return $this
+            ->setHeader('Authorization', $authorizationToken)
+            ->setHeader('Organization', $organizationId);
+    }
+
+    /**
      * @inheritDoc
      */
     final public function setReference(string $reference): RequestInterface

@@ -16,11 +16,14 @@ interface RequestInterface extends BaseRequestInterface
      * @param array $recipients
      * @return RequestInterface
      */
-    public function setRequiredParameters(
-        string $message,
-        string $originator,
-        array $recipients
-    ): RequestInterface;
+    public function setRequiredParameters(string $message, string $originator, array $recipients): RequestInterface;
+
+    /**
+     * @param string $authorizationToken
+     * @param int $organizationId
+     * @return RequestInterface
+     */
+    public function setRequiredHeaders(string $authorizationToken, int $organizationId): RequestInterface;
 
     /**
      * @param DateTimeImmutable $scheduledAt
@@ -29,8 +32,8 @@ interface RequestInterface extends BaseRequestInterface
     public function setScheduledAt(DateTimeImmutable $scheduledAt): RequestInterface;
 
     /**
-     * @param string $webhook
+     * @param string $reportUrl
      * @return RequestInterface
      */
-    public function setWebHook(string $webhook): RequestInterface;
+    public function setReportUrl(string $reportUrl): RequestInterface;
 }
