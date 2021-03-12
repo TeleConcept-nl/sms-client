@@ -2,6 +2,7 @@
 namespace Teleconcept\Sms\Client\Request\Message\Normal\Check;
 
 use Teleconcept\Sms\Client\Request\RequestInterface as BaseRequestInterface;
+use Teleconcept\Sms\Client\Response\Message\Normal\Check\ResponseInterface as CheckNormalMessageResponse;
 
 /**
  * Interface CheckRequestInterface
@@ -21,4 +22,9 @@ interface RequestInterface extends BaseRequestInterface
      * @return RequestInterface
      */
     public function setRequiredHeaders(string $authorizationToken, int $organizationId): RequestInterface;
+
+    /**
+     * @return CheckNormalMessageResponse
+     */
+    public function send(): CheckNormalMessageResponse;
 }

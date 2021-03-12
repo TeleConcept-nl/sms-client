@@ -3,6 +3,7 @@ namespace Teleconcept\Sms\Client\Request\Message\Dcb\Create;
 
 use DateTimeImmutable;
 use Teleconcept\Sms\Client\Request\RequestInterface as BaseRequestInterface;
+use Teleconcept\Sms\Client\Response\Message\Dcb\Create\ResponseInterface as CreateDcbMessageResponse;
 
 /**
  * Interface RequestInterface
@@ -35,4 +36,9 @@ interface RequestInterface extends BaseRequestInterface
      * @return RequestInterface
      */
     public function setRequiredHeaders(string $authorizationToken): RequestInterface;
+
+    /**
+     * @return CreateDcbMessageResponse
+     */
+    public function send(): CreateDcbMessageResponse;
 }

@@ -22,9 +22,4 @@ interface RequestInterface extends \Psr\Http\Message\RequestInterface
      * @return RequestInterface
      */
     public function setHeader(string $header, string $value): RequestInterface;
-
-    /**
-     * @return Response
-     */
-    public function send(): Response;
 }

@@ -7,6 +7,7 @@ use Teleconcept\Sms\Client\ClientInterface as SmsClient;
 use Teleconcept\Sms\Client\Exception\ValidationException;
 use Teleconcept\Sms\Client\Request\Request as BaseRequest;
 use Teleconcept\Sms\Client\Response\BaseResponseInterface as Response;
+use Teleconcept\Sms\Client\Response\Message\Normal\Check\ResponseInterface as CheckNormalMessageResponse;
 use function GuzzleHttp\Psr7\stream_for;
 use function is_int;
 use function is_string;
@@ -50,11 +51,11 @@ class Request extends BaseRequest implements RequestInterface
     }
 
     /**
-     * @return Response
+     * @return CheckNormalMessageResponse
      * @throws ValidationException
      * @throws GuzzleException
      */
-    final public function send(): Response
+    final public function send(): CheckNormalMessageResponse
     {
         $errors = $this->validate();
 

@@ -7,6 +7,7 @@ use Teleconcept\Sms\Client\ClientInterface as SmsClient;
 use Teleconcept\Sms\Client\Exception\ValidationException;
 use Teleconcept\Sms\Client\Request\Request as BaseRequest;
 use Teleconcept\Sms\Client\Response\BaseResponseInterface as Response;
+use Teleconcept\Sms\Client\Response\Message\Normal\Create\ResponseInterface as CreateNormalMessageResponse;
 use function filter_var;
 use function GuzzleHttp\Psr7\stream_for;
 use function is_array;
@@ -76,11 +77,11 @@ class Request extends BaseRequest implements RequestInterface
     }
 
     /**
-     * @return Response
+     * @return CreateNormalMessageResponse
      * @throws GuzzleException
      * @throws ValidationException
      */
-    final public function send(): Response
+    final public function send(): CreateNormalMessageResponse
     {
         $errors = $this->validate();
 

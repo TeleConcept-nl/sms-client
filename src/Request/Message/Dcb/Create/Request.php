@@ -6,6 +6,7 @@ use Teleconcept\Sms\Client\ClientInterface as SmsClient;
 use Teleconcept\Sms\Client\Exception\ValidationException;
 use Teleconcept\Sms\Client\Request\Request as BaseRequest;
 use Teleconcept\Sms\Client\Response\BaseResponseInterface as Response;
+use Teleconcept\Sms\Client\Response\Message\Dcb\Create\ResponseInterface as CreateDcbMessageResponse;
 use function filter_var;
 use function GuzzleHttp\Psr7\stream_for;
 use function json_encode;
@@ -72,11 +73,11 @@ class Request extends BaseRequest implements RequestInterface
     }
 
     /**
-     * @return Response
+     * @return CreateDcbMessageResponse
      * @throws GuzzleException
      * @throws ValidationException
      */
-    final public function send(): Response
+    final public function send(): CreateDcbMessageResponse
     {
         $errors = $this->validate();
 

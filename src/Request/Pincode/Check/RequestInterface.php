@@ -2,6 +2,7 @@
 namespace Teleconcept\Sms\Client\Request\Pincode\Check;
 
 use Teleconcept\Sms\Client\Request\RequestInterface as BaseRequestInterface;
+use Teleconcept\Sms\Client\Response\Pincode\ResponseInterface as CheckPincodeResponse;
 
 /**
  * Interface RequestInterface
@@ -31,4 +32,9 @@ interface RequestInterface extends BaseRequestInterface
      * @return RequestInterface
      */
     public function setRequiredHeaders(string $authorizationToken, int $organizationId): RequestInterface;
+
+    /**
+     * @return CheckPincodeResponse
+     */
+    public function send(): CheckPincodeResponse;
 }

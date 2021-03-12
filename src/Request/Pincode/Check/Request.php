@@ -6,11 +6,7 @@ use GuzzleHttp\Psr7\Uri;
 use Teleconcept\Sms\Client\ClientInterface as SmsClient;
 use Teleconcept\Sms\Client\Exception\ValidationException;
 use Teleconcept\Sms\Client\Request\Request as BaseRequest;
-use Teleconcept\Sms\Client\Response\Error\BadRequestResponse;
-use Teleconcept\Sms\Client\Response\Error\NotFoundResponse;
-use Teleconcept\Sms\Client\Response\Error\UnauthorizedResponse;
 use Teleconcept\Sms\Client\Response\Pincode\ResponseInterface as CheckPincodeResponse;
-use Teleconcept\Sms\Client\Response\BaseResponseInterface as Response;
 use function is_int;
 use function is_string;
 use function sprintf;
@@ -69,11 +65,11 @@ class Request extends BaseRequest implements RequestInterface
 
 
     /**
-     * @return CheckPincodeResponse|NotFoundResponse|UnauthorizedResponse|BadRequestResponse
+     * @return CheckPincodeResponse
      * @throws GuzzleException
      * @throws ValidationException
      */
-    final public function send(): Response
+    final public function send(): CheckPincodeResponse
     {
         $errors = $this->validate();
 

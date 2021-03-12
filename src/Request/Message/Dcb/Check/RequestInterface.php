@@ -2,6 +2,7 @@
 namespace Teleconcept\Sms\Client\Request\Message\Dcb\Check;
 
 use Teleconcept\Sms\Client\Request\RequestInterface as BaseRequestInterface;
+use Teleconcept\Sms\Client\Response\Message\Dcb\Check\ResponseInterface as CheckDcbMessageResponse;
 
 /**
  * Interface CheckRequestInterface
@@ -20,4 +21,9 @@ interface RequestInterface extends BaseRequestInterface
      * @return RequestInterface
      */
     public function setRequiredHeaders(string $authorizationToken): RequestInterface;
+
+    /**
+     * @return CheckDcbMessageResponse
+     */
+    public function send(): CheckDcbMessageResponse;
 }

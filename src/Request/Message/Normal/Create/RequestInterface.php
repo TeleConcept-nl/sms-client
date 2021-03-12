@@ -3,6 +3,7 @@ namespace Teleconcept\Sms\Client\Request\Message\Normal\Create;
 
 use DateTimeImmutable;
 use Teleconcept\Sms\Client\Request\RequestInterface as BaseRequestInterface;
+use Teleconcept\Sms\Client\Response\Message\Normal\Create\ResponseInterface as CreateNormalMessageResponse;
 
 /**
  * Interface CreateRequestInterface
@@ -36,4 +37,9 @@ interface RequestInterface extends BaseRequestInterface
      * @return RequestInterface
      */
     public function setReportUrl(string $reportUrl): RequestInterface;
+
+    /**
+     * @return CreateNormalMessageResponse
+     */
+    public function send(): CreateNormalMessageResponse;
 }
