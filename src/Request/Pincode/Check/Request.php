@@ -9,7 +9,7 @@ use Teleconcept\Sms\Client\Request\Request as BaseRequest;
 use Teleconcept\Sms\Client\Response\Error\BadRequestResponse;
 use Teleconcept\Sms\Client\Response\Error\NotFoundResponse;
 use Teleconcept\Sms\Client\Response\Error\UnauthorizedResponse;
-use Teleconcept\Sms\Client\Response\Pincode\CheckPincodeResponseInterface as CheckPincodeResponse;
+use Teleconcept\Sms\Client\Response\Pincode\ResponseInterface as CheckPincodeResponse;
 use Teleconcept\Sms\Client\Response\BaseResponseInterface as Response;
 use function is_int;
 use function is_string;

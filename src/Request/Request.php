@@ -38,7 +38,7 @@ abstract class Request extends Psr7Request implements RequestInterface
      * @param mixed $value
      * @return RequestInterface
      */
-    final public function setOption(string $option, string $value): RequestInterface
+    final public function setOption(string $option, $value): RequestInterface
     {
         if (!array_key_exists($option, $this->options) || $this->options[$option] !== $value) {
             $this->options[$option] = $value;

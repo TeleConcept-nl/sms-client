@@ -4,6 +4,7 @@ namespace Teleconcept\Sms\Client;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
+use Teleconcept\Sms\Client\Factory\Response\FactoryInterface as ResponseFactory;
 use Teleconcept\Sms\Client\Request\Credit\Check\RequestInterface as CheckCreditRequest;
 use Teleconcept\Sms\Client\Request\Message\Dcb\Check\RequestInterface as CheckDcbMessageRequest;
 use Teleconcept\Sms\Client\Request\Message\Dcb\Create\RequestInterface as CreateDcbMessageRequest;
@@ -11,16 +12,16 @@ use Teleconcept\Sms\Client\Request\Message\Normal\Check\RequestInterface as Chec
 use Teleconcept\Sms\Client\Request\Message\Normal\Create\RequestInterface as CreateNormalMessageRequest;
 use Teleconcept\Sms\Client\Request\Pincode\Check\RequestInterface as CheckPincodeRequest;
 use Teleconcept\Sms\Client\Response\BaseResponseInterface as Response;
-use Teleconcept\Sms\Client\Response\Credit\Check\Response as CheckCreditResponse;
+use Teleconcept\Sms\Client\Response\Credit\Check\ResponseInterface as CheckCreditResponse;
 use Teleconcept\Sms\Client\Response\Error\BadRequestResponse;
 use Teleconcept\Sms\Client\Response\Error\NotFoundResponse;
 use Teleconcept\Sms\Client\Response\Error\PreconditionFailedResponse;
 use Teleconcept\Sms\Client\Response\Error\UnauthorizedResponse;
-use Teleconcept\Sms\Client\Response\Message\Dcb\Check\Response as CheckDcbMessageResponse;
-use Teleconcept\Sms\Client\Response\Message\Dcb\Create\Response as CreateDcbMessageResponse;
-use Teleconcept\Sms\Client\Response\Message\Normal\Check\Response as CheckNormalMessageResponse;
-use Teleconcept\Sms\Client\Response\Message\Normal\Create\Response as CreateNormalMessageResponse;
-use Teleconcept\Sms\Client\Response\Pincode\CheckPincodeResponse;
+use Teleconcept\Sms\Client\Response\Message\Dcb\Check\ResponseInterface as CheckDcbMessageResponse;
+use Teleconcept\Sms\Client\Response\Message\Dcb\Create\ResponseInterface as CreateDcbMessageResponse;
+use Teleconcept\Sms\Client\Response\Message\Normal\Check\ResponseInterface as CheckNormalMessageResponse;
+use Teleconcept\Sms\Client\Response\Message\Normal\Create\ResponseInterface as CreateNormalMessageResponse;
+use Teleconcept\Sms\Client\Response\Pincode\Check\ResponseInterface as CheckPincodeResponse;
 
 /**
  * Class Client
@@ -28,133 +29,94 @@ use Teleconcept\Sms\Client\Response\Pincode\CheckPincodeResponse;
  */
 class Client extends GuzzleClient implements ClientInterface
 {
+    private ResponseFactory $responseFactory;
+
     /**
      * Client constructor.
-     * @param $smsApiDomain
+     * @param string $smsApiDomain
+     * @param ResponseFactory $responseFactory
      */
-    public function __construct(string $smsApiDomain)
+    public function __construct(string $smsApiDomain, ResponseFactory $responseFactory)
     {
+        $this->responseFactory = $responseFactory;
         parent::__construct(['base_uri' => $smsApiDomain]);
     }
 
     /**
      * @param CheckCreditRequest $request
-     * @return Response
+     * @return CheckCreditResponse
      * @throws GuzzleException
+     * @throws ClientException
      */
-    final public function checkCredit(CheckCreditRequest $request): Response
+    final public function checkCredit(CheckCreditRequest $request): CheckCreditResponse
     {
-        try {
-            $response = $this->send($request);
-        } catch (ClientException $exception) {
-            return $this->processClientException($exception);
-        }
-
-        return new CheckCreditResponse($response);
+        return $this->responseFactory->createCheckCreditResponse(
+            $this->send($request)
+        );
     }
 
     /**
      * @param CheckPincodeRequest $request
-     * @return Response
+     * @return CheckPincodeResponse
      * @throws GuzzleException
+     * @throws ClientException
      */
-    final public function checkPincode(CheckPincodeRequest $request): Response
+    final public function checkPincode(CheckPincodeRequest $request): CheckPincodeResponse
     {
-        try {
-            $response = $this->send($request);
-        } catch (ClientException $exception) {
-            return $this->processClientException($exception);
-        }
-
-        return new CheckPincodeResponse($response);
+        return $this->responseFactory->createCheckPincodeResponse(
+            $this->send($request)
+        );
     }
 
     /**
      * @param CheckNormalMessageRequest $request
-     * @return Response
+     * @return CheckNormalMessageResponse
      * @throws GuzzleException
+     * @throws ClientException
      */
-    final public function checkNormalMessage(CheckNormalMessageRequest $request): Response
+    final public function checkNormalMessage(CheckNormalMessageRequest $request): CheckNormalMessageResponse
     {
-        try {
-            $response = $this->send($request);
-        } catch (ClientException $exception) {
-            return $this->processClientException($exception);
-        }
-
-        return new CheckNormalMessageResponse($response);
+        return $this->responseFactory->createCheckNormalMessageResponse(
+            $this->send($request)
+        );
     }
 
     /**
      * @param CreateNormalMessageRequest $request
-     * @return Response
+     * @return CreateNormalMessageResponse
      * @throws GuzzleException
+     * @throws ClientException
      */
-    final public function createNormalMessage(CreateNormalMessageRequest $request): Response
+    final public function createNormalMessage(CreateNormalMessageRequest $request): CreateNormalMessageResponse
     {
-        try {
-            $response = $this->send($request);
-        } catch (ClientException $exception) {
-            return $this->processClientException($exception);
-        }
-
-        return new CreateNormalMessageResponse($response);
+        return $this->responseFactory->createCreateNormalMessageResponse(
+            $this->send($request)
+        );
     }
 
     /**
      * @param CheckDcbMessageRequest $request
-     * @return Response
+     * @return CheckDcbMessageResponse
      * @throws GuzzleException
+     * @throws ClientException
      */
-    final public function checkDcbMessage(CheckDcbMessageRequest $request): Response
+    final public function checkDcbMessage(CheckDcbMessageRequest $request): CheckDcbMessageResponse
     {
-        try {
-            $response = $this->send($request);
-        } catch (ClientException $exception) {
-            return $this->processClientException($exception);
-        }
-
-        return new CheckDcbMessageResponse($response);
+        return $this->responseFactory->createCheckDcbMessageResponse(
+            $this->send($request)
+        );
     }
 
     /**
      * @param CreateDcbMessageRequest $request
-     * @return Response
+     * @return CreateDcbMessageResponse
      * @throws GuzzleException
-     */
-    final public function createDcbMessage(CreateDcbMessageRequest $request): Response
-    {
-        try {
-            $response = $this->send($request);
-        } catch (ClientException $exception) {
-            return $this->processClientException($exception);
-        }
-
-        return new CreateDcbMessageResponse($response);
-    }
-
-    /**
-     * @param ClientException $exception
-     * @return Response
      * @throws ClientException
      */
-    private function processClientException(ClientException $exception): Response
+    final public function createDcbMessage(CreateDcbMessageRequest $request): CreateDcbMessageResponse
     {
-        $errorResponse = $exception->getResponse();
-
-        if ($errorResponse && $errorResponse->getStatusCode() === 400) {
-            return new BadRequestResponse($errorResponse);
-        }
-        if ($errorResponse && $errorResponse->getStatusCode() === 401) {
-            return new UnauthorizedResponse($errorResponse);
-        }
-        if ($errorResponse && $errorResponse->getStatusCode() === 404) {
-            return new NotFoundResponse($errorResponse);
-        }
-        if ($errorResponse && $errorResponse->getStatusCode() === 412) {
-            return new PreconditionFailedResponse($errorResponse);
-        }
-
-        throw $exception;
+        return $this->responseFactory->createCreateDcbMessageResponse(
+            $this->send($request)
+        );
     }
 }

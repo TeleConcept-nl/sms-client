@@ -68,7 +68,7 @@ class Request extends BaseRequest implements RequestInterface
      */
     final public function setReportUrl(string $reportUrl): RequestInterface
     {
-        return $this->setOption('web-hook', $reportUrl);
+        return $this->setOption('report-url', $reportUrl);
     }
 
     /**

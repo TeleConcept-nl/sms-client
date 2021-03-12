@@ -1,17 +1,15 @@
 <?php
-namespace Teleconcept\Sms\Client\Response\Pincode;
+namespace Teleconcept\Sms\Client\Response\Pincode\Check;
 
 use DateTimeImmutable;
-use Psr\Http\Message\ResponseInterface as Response;
 use function date_create_immutable;
-use function date_interval_create_from_date_string;
 use function json_decode;
 
 /**
  * Class CheckPincodeResponse
  * @package Teleconcept\Sms\Client\Response\Pincode
  */
-class CheckPincodeResponse implements CheckPincodeResponseInterface
+class Response implements ResponseInterface
 {
     private int $organizationId;
     private int $mobileOriginatorId;
@@ -26,10 +24,10 @@ class CheckPincodeResponse implements CheckPincodeResponseInterface
     private DateTimeImmutable $reportedAt;
 
     /**
-     * CheckPincodeResponse constructor.
-     * @param Response $response
+     * Response constructor.
+     * @param \Psr\Http\Message\ResponseInterface $response
      */
-    public function __construct(Response $response)
+    public function __construct(\Psr\Http\Message\ResponseInterface $response)
     {
         $content = json_decode($response->getBody()->getContents(), true);
         $data = $content['data'];

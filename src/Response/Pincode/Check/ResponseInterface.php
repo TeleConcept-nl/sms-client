@@ -1,14 +1,14 @@
 <?php
-namespace Teleconcept\Sms\Client\Response\Pincode;
+namespace Teleconcept\Sms\Client\Response\Pincode\Check;
 
 use DateTimeImmutable;
 use Teleconcept\Sms\Client\Response\BaseResponseInterface;
 
 /**
- * Interface CheckPincodeResponse
+ * Interface ResponseInterface
  * @package Teleconcept\Sms\Client\Response\Pincode
  */
-interface CheckPincodeResponseInterface extends BaseResponseInterface
+interface ResponseInterface extends BaseResponseInterface
 {
     /**
      * @return int
